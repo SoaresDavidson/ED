@@ -145,5 +145,6 @@ while True:
     else:
         print("Programa será fechado")
         exit()
+    print("cu")
     
 
