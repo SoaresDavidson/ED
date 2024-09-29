@@ -145,11 +145,3 @@ while True:
     else:
         print("Programa será fechado")
         exit()
-    print("cu")
-    
-
-
-
-print('amor ao saleh viva :)     ')
-
-print('v')
