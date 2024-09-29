@@ -116,7 +116,8 @@ print("Bem vindo ao simulador de lista encadeada dupla. Segue menu de opções")
 lista = DoubleList()
 while True:
     
-    print("1 - Adicionar elementos\n2 - Verificar se elemento está na lista\n3 - Excluir elemento\n4 - Exibir todos os elementos e quantidade\nOutro - Fechar o programa")
+    print('''1 - Adicionar elementos\n2 - Verificar se elemento está na lista\n3 - Excluir elemento\n
+            4 - Exibir todos os elementos e quantidade\nOutro - Fechar o programa''')
     x = input()
     clear()
     try:
