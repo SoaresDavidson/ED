@@ -93,25 +93,39 @@ class List:
         return msg.strip() 
 
 
-if __name__ == "__main__":
-    l = List() 
-    for i in range(51):
-        l.push_back(i)
-    for i in range(-1,-51,-1):
-        l.push_front(i)
-    print(l)
-    print(l.size())
-    for i in range(51):
-        l.erase(i)
-    print(l)
-    print(l.size())
-    print(l)
+def menu():
+    l = List()
+    while True:
+        print("\nMenu:")
+        print("1. Inserir elemento no início da lista")
+        print("2. Inserir elemento no final da lista")
+        print("3. Verificar se um elemento existe na lista")
+        print("4. Excluir um elemento da lista")
+        print("5. Mostrar todos os elementos e a quantidade")
+        print("6. Sair")
 
-    l1 = List()
-    l1.push_back("ana")
-    l1.push_back("ANA")
-    l1.push_back("Ana")
-    l1.push_back("beatriz")
-    l1.push_front("carlos")
-    print(l1) 
-   
+        opcao = input("Escolha uma opção: ")
+
+        if opcao == "1":
+            valor = input("Digite o elemento: ")
+            l.push_front(valor)
+        elif opcao == "2":
+            valor = input("Digite o elemento: ")
+            l.push_back(valor)
+        elif opcao == "3":
+            valor = input("Digite o elemento: ")
+            existe = l.search(valor)
+            print("Elemento encontrado!" if existe else "Elemento não encontrado.")
+        elif opcao == "4":
+            valor = input("Digite o elemento: ")
+            l.erase(valor)
+        elif opcao == "5":
+            print(f'[{l}]')
+            print(f"Tamanho da lista: {l.size()}")
+        elif opcao == "6":
+            break
+        else:
+            print("Opção inválida, tente novamente.")
+
+if __name__ == "__main__":
+    menu()
