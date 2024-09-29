@@ -146,4 +146,5 @@ while True:
         print("Programa será fechado")
         exit()
     
-
+print('odio ao saleh morra :)     ')
+print('v')
