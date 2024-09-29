@@ -147,5 +147,9 @@ while True:
         exit()
     print("cu")
     
+
+
+
 print('amor ao saleh viva :)     ')
+
 print('v')
