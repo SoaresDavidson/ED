@@ -147,5 +147,5 @@ while True:
         exit()
     print("cu")
     
-print('odio ao saleh morra :)     ')
+print('amor ao saleh viva :)     ')
 print('v')
