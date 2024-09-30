@@ -104,10 +104,10 @@ class DoubleList():
         return int(self.count)
     
     def getElements(self): #* Retorna uma lista com os elementos da lista duplamente encadeada
-        elements = []
+        elements = ""
         n = self.head
         while n != None:
-            elements.append(str(n))
+            elements += str(n.elem) + ", "
             n = n.next
         return elements
             
