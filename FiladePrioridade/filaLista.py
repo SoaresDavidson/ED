@@ -12,6 +12,8 @@ class Priority_Queue:
         self.filaPrioridade = 0
 
     def prioridade(self,pessoa):
+        if pessoa.idade < 60:
+            return 0
         if pessoa.idade < 70:
             return 1
         if pessoa.idade < 80:
@@ -21,9 +23,7 @@ class Priority_Queue:
         if pessoa.idade < 100:
             return 4
         if pessoa.idade >=100:
-            return 5   
-        else:
-            return 0                 
+            return 5                    
 
     def push(self,nome,idade):
         pessoa = Pessoa(nome,idade)
@@ -62,4 +62,18 @@ class Priority_Queue:
             self.back = pessoa
         else:
             self.back.next = pessoa
-            pessoa = self.back            
+            self.back = pessoa          
+
+    def __repr__(self):
+        atual = self.head
+        msg = ''
+        while atual is not None:
+            msg+=f' {atual.nome} {atual.idade}' 
+            atual = atual.next   
+        return msg
+
+
+fila = Priority_Queue()
+fila.push('ana',50)
+fila.push('joao',60)
+print(fila)              
