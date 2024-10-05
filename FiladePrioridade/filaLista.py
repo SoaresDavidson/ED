@@ -1,9 +1,10 @@
+import os
 class Pessoa:
     peso = 0
     def __init__(self,nome,idade):
         self.next = None
         self.nome = nome
-        self.idade = idade
+        self.idade = int(idade)
 
         
 
@@ -36,7 +37,7 @@ class Priority_Queue:
 
     def push(self,nome,idade):
         pessoa = Pessoa(nome,idade)
-        if idade >= 60:
+        if pessoa.idade >= 60:
             self.adicionar_prioridade(pessoa)
         else:
             self.adicionar_comum(pessoa) 
@@ -47,7 +48,7 @@ class Priority_Queue:
 
     def pop_front(self):
         if not self.empty():
-            aux = f'{self.head.nome},{self.head.idade}'
+            aux = f'{self.head.nome}: {self.head.idade}'
             if self.head.peso != 0: #se a pessoa que esta no começo da fila for preferencial
                 self.atendidasPrioridade+=1
             else:
@@ -91,38 +92,85 @@ class Priority_Queue:
         atual = self.head
         msg = ''
         while atual is not None:
-            msg+=f' {atual.nome} {atual.idade}' 
-            atual = atual.next   
+            msg+=f'{atual.nome}: {atual.idade} anos, ' 
+            atual = atual.next 
+        if msg:
+            msg = msg[:-2]
         return msg
 
 def color(txt,cor):
-    print(f'\033[{cor}{txt}\033[m')
+    print(f'\033[{cor}m{txt}\033[m')
 
-def menu():
-    #alguem cria o menu e utiliza a função de cima ela modifica as cores no terminal
-    #se tiver duvida na internet tem os codigos das cores ou eu posso ensinar como fazer
-    pass    
+def menu(fila):
+    color('='*30,'034')
+    color(f'{"ATENDIMENTO":-^30}','037;1')
+    color('='*30,'034')
+    color(f'''1) Inserir pessoa na fila.
+2) Atender pessoa da fila.
+3) Listar pessoas da fila.
+4) Situação atual da fila.
+5) sair''','034;1')
+    opc = str(input('escola uma opção: ')).strip()
+    if opc == '1':
+        nome = str(input('digite o nome da pessoa: ')).strip()
+        while True:
+            idade = str(input('digite a idade da pessoa: ')).strip() 
+            if idade.isnumeric():
+                break
+            color('insira uma idade válida','031;1')
+        fila.push(nome,idade)
+        color(f'{nome} foi adicionado na fila','032')
+        input('pressione qualquer tecla para continuar...')
+
+    elif opc == '2':
+        if not fila.empty():
+            pessoa = fila.pop_front()
+            color(f'{pessoa}, acabou de ser atendido','032')
+        else:
+            color('fila vazia','031;1')    
+        input('pressione qualquer tecla para continuar...')
+    elif opc == '3':
+        if not fila.empty():
+            print('Estão na fila: ',end='')
+            print(fila)
+        else:
+            color('fila vazia','031;1')    
+        input('pressione qualquer tecla para continuar...')
+    elif opc == '4':
+        atendimentos = fila.atendidasComum+fila.atendidasPrioridade
+        prioridade = fila.filaPrioridade-fila.atendidasPrioridade
+        comum = fila.filaComum-fila.atendidasComum
+        color(f'quantidade de pessoas atendidas: {atendimentos}','032;1')
+        color(f'tamanho da fila de prioridade: {prioridade}','032;1')
+        color(f'tamanho da fila de comum: {comum}','032;1')
+        input('pressione qualquer tecla para continuar...')
+    elif opc == '5':
+        if fila.empty():
+
+            return True
+        else:
+            color('Ainda existe pessoas que não foram atendidas','031;1') 
+            input('pressione qualquer tecla para continuar...')
+
+    else:
+        color('Opção incorreta!','031;1')
+        input('pressione qualquer tecla para continuar...')
 
 
 #teste
-fila = Priority_Queue()
-fila.push('ana',71)
-fila.push('joao',60)
-fila.push('pedro',50)
-fila.push('raquel',80)
-fila.push('maria',61)
-fila.push('saleh',19)
-fila.push('marcelo',63)
-fila.push('victor',62)
-fila.pop_front()
-fila.pop_front()
-print(fila.size_prioridade())
-print(fila.size_comum())
-print(fila)  
+
 
 #a parte principal vai ser aqui mas vou deixar comentado
-'''
+
 if __name__ == '__main__':
+    fila = Priority_Queue()
     while True:
-        menu()
-'''
+        os.system('cls' if os.name == 'nt' else 'clear')
+        if menu(fila):
+            break
+        
+    color('Atendimento encerrado','032;1')
+    color('Estátisticas: ','032;1')
+    color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
+    color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+    color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
