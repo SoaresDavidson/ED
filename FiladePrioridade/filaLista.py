@@ -62,7 +62,7 @@ class Priority_Queue:
             self.head = pessoa
             return 
         atual = self.head
-
+        anterior = None
         while atual is not None and pessoa.peso <= atual.peso:
             anterior = atual
             atual = atual.next
@@ -117,3 +117,4 @@ if __name__ == '__main__':
         color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
     except:
         color('Não apareceu nenhuma pessoa hoje','031;1')    
+
