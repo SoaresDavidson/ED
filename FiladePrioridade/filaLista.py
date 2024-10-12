@@ -106,7 +106,7 @@ if __name__ == '__main__':
     fila = Priority_Queue()
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        if menu.menu(fila):
+        if menu.executar(fila):
             break
 
     try:    
