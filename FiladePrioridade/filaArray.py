@@ -1,0 +1,165 @@
+import itertools
+
+class Pessoa():
+    def __init__(self, nome, idade):
+        self.nome = nome
+        self.idade = idade
+
+    def getIdade(self):
+        return self.idade
+
+    def getNome(self):
+        return self.nome
+    
+    def __str__(self):
+        return str(self.nome) + '(' + str(self.idade) + ')'
+    
+class Array():
+    def __init__(self, lim):
+        self.elem = [None for i in range(lim)]
+        self.head = 0
+        self.tail = 0
+        self.lim = lim
+        self.attended = 0
+
+    def getId(self, id):
+        return self.elem[id]
+    
+    def getHead(self):
+        return self.head
+    
+    def getTail(self):
+        return self.tail
+    
+    def getAttended(self):
+        return self.attended
+    
+    def filled(self):
+        i = 0
+        for _ in range(self.lim):
+            if self.elem[_] is not None: i += 1
+        return i
+    
+    def isFull(self):
+        if self.filled() == self.lim: return True
+        return False
+    
+    def isEmpty(self):
+        if self.filled() == 0: return True
+        return False
+    
+    def add(self, elem: 'Pessoa'):
+        if not self.isFull():
+            if self.tail == self.lim:
+                self.tail = 0
+                self.elem[0] = elem
+            else:
+                self.elem[self.tail] = elem
+                self.tail += 1
+            return True
+        return False
+    
+    def attend(self):
+        if not self.isEmpty():
+            if self.head == self.lim:
+                self.elem[self.lim - 1] = None
+                self.head = 0
+            else:
+                self.elem[self.head] = None
+                self.head += 1
+            self.attended += 1
+            return True
+        return False
+    
+    def __str__(self):
+        res =""
+        i = self.head
+        while i != self.tail:
+            if i == self.lim: i = 0
+            res += str(self.elem[i]) + ", "
+            i += 1
+        if i != self.head:
+            res += '\n'
+        return res
+
+
+print("Bem vindo à fila de prioridade com array")    
+x = int(input("Qual o tamanho das filas a serem feitas? "))
+comuns =  Array(x)
+sexa = Array(x)
+septa = Array(x)
+octa = Array(x)
+nona = Array(x)
+cente = Array(x)
+prioridades = [cente, nona, octa, septa, sexa]
+lista = ['C', 'P', 'P']
+ciclo = itertools.cycle(lista)
+
+while True:
+    print("Digite:\n1 - Adicionar pessoa à fila\n2 - Atender pessoa\n3 - Listar filas\n4 - Gerar informações\n5 - Sair (somente se todas as filas estiverem vazias)")
+    x = int(input(""))
+
+    if x == 1:
+        nome = input("Digite o nome da pessoa ")
+        idade = int(input("Digite a idade "))
+        pessoa = Pessoa(nome, idade)
+        if idade >= 100:
+            cente.add(pessoa)
+        elif idade >= 90:
+            nona.add(pessoa)
+        elif idade >= 80:
+            octa.add(pessoa)
+        elif idade >= 70:
+            septa.add(pessoa)
+        elif idade >= 60:
+            sexa.add(pessoa)
+        else:
+            comuns.add(pessoa)
+    elif x == 2:
+        turno = next(ciclo)
+        if turno == 'C':
+            if not comuns.attend(): print("Filas vazias") 
+        else:
+            if not cente.isEmpty():
+                cente.attend()
+            elif not nona.isEmpty():
+                nona.attend()
+            elif not octa.isEmpty():
+                octa.attend()
+            elif not septa.isEmpty():
+                septa.attend()
+            elif not sexa.isEmpty():
+                sexa.attend()
+            else:
+                if not comuns.attend(): print("Filas vazias") 
+    elif x == 3:
+        for elem in prioridades:
+            print(elem, end="")
+        print(comuns, end="")
+    elif x == 4:
+        print(f"Antedimentos comuns realizados: {comuns.getAttended()}. Resta atender: {comuns.filled()}")
+        i = 0
+        j = 0
+        for elem in prioridades:
+            i += elem.getAttended()
+            j += elem.filled()
+        print(f"Atendimentos prioritários realizados: {i}. Resta atender: {j}")
+    else:
+        for elem in prioridades:
+            if not elem.isEmpty(): 
+                print("Impossível finalizar. Ainda há clientes prioridade aguardando")
+                continue
+        if not comuns.isEmpty(): 
+            print("Impossível finalizar. Ainda há clientes comuns aguardando atendimento")
+            continue
+        i = 0
+        for elem in prioridades:
+            i += elem.getAttended()
+        print(f"Atendimentos comuns: {comuns.getAttended()}; Atendimentos prioritários: {i}")
+        try:
+            print(f"Relação Atendimentos Prioridade/Total: {(i/(i + comuns.getAttended()) * 100):.2f}%")
+        except:
+            print("Filas vazias. Programa encerrando")
+        break
+
+                
