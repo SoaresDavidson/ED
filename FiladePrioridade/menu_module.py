@@ -7,10 +7,10 @@ class Menu():
         self.color(f'{"ATENDIMENTO":-^30}','037;1')
         self.color('='*30,'034')
         self.color(f'''1) Inserir pessoa na fila.
-    2) Atender pessoa da fila.
-    3) Listar pessoas da fila.
-    4) Situação atual da fila.
-    5) sair''','034;1')
+2) Atender pessoa da fila.
+3) Listar pessoas da fila.
+4) Situação atual da fila.
+5) sair''','034;1')
         opc = str(input('escola uma opção: ')).strip()
         if opc == '1':
             nome = str(input('digite o nome da pessoa: ')).strip()

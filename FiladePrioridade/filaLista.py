@@ -113,7 +113,7 @@ if __name__ == '__main__':
     fila = Priority_Queue()
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
-        if menu(fila):
+        if menu.menu(fila):
             break
         
     color('Atendimento encerrado','032;1')
