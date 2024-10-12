@@ -1,12 +1,11 @@
 import os, menu_module
 class Pessoa:
+    #peso = nivel de prioridade
     peso = 0
     def __init__(self,nome,idade):
         self.next = None
         self.nome = nome
         self.idade = int(idade)
-
-        
 
 class Priority_Queue:
     def __init__(self):
@@ -66,19 +65,19 @@ class Priority_Queue:
             self.head = pessoa
             return 
         atual = self.head
-        anterior = None
-        while atual is not None:
-            if  pessoa.peso > atual.peso:
-                break
+
+        while atual is not None and pessoa.peso <= atual.peso:
             anterior = atual
             atual = atual.next
 
         if anterior is None:
             pessoa.next = self.head
             self.head = pessoa   
+
         else:
             pessoa.next = atual   
             anterior.next = pessoa 
+
         if pessoa.next is None:
             self.back = pessoa    
             
