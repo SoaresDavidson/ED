@@ -1,4 +1,4 @@
-import os
+import os, menu_module
 class Pessoa:
     #peso = nivel de prioridade
     peso = 0
@@ -40,10 +40,12 @@ class Priority_Queue:
             self.adicionar_prioridade(pessoa)
         else:
             self.adicionar_comum(pessoa) 
+
     def empty(self):
-        if self.head is not None:
-            return False
-        return True
+        return self.head is None
+        #if self.head is not None:
+        #    return False
+        #return True
 
     def pop_front(self):
         if not self.empty():
@@ -63,8 +65,7 @@ class Priority_Queue:
             self.head = pessoa
             return 
         atual = self.head
-        anterior = None 
-        
+
         while atual is not None and pessoa.peso <= atual.peso:
             anterior = atual
             atual = atual.next
@@ -100,64 +101,7 @@ class Priority_Queue:
         return msg
 
 def color(txt,cor):
-    print(f'\033[{cor}m{txt}\033[m')
-
-
-def menu(fila):
-    color('='*30,'034')
-    color(f'{"ATENDIMENTO":-^30}','037;1')
-    color('='*30,'034')
-    color(f'''1) Inserir pessoa na fila.
-2) Atender pessoa da fila.
-3) Listar pessoas da fila.
-4) Situação atual da fila.
-5) sair''','034;1')
-    opc = str(input('escolha uma opção: ')).strip()
-    if opc == '1':
-        nome = str(input('digite o nome da pessoa: ')).strip()
-        while True:
-            idade = str(input('digite a idade da pessoa: ')).strip() 
-            if idade.isnumeric():
-                break
-            color('insira uma idade válida','031;1')
-        fila.push(nome,idade)
-        color(f'{nome} foi adicionado na fila','032')
-        input('pressione qualquer tecla para continuar...')
-
-    elif opc == '2':
-        if not fila.empty():
-            pessoa = fila.pop_front()
-            color(f'{pessoa}, acabou de ser atendido','032')
-        else:
-            color('fila vazia','031;1')    
-        input('pressione qualquer tecla para continuar...')
-    elif opc == '3':
-        if not fila.empty():
-            print('Estão na fila: ',end='')
-            print(fila)
-        else:
-            color('fila vazia','031;1')    
-        input('pressione qualquer tecla para continuar...')
-    elif opc == '4':
-        atendimentos = fila.atendidasComum+fila.atendidasPrioridade
-        prioridade = fila.filaPrioridade-fila.atendidasPrioridade
-        comum = fila.filaComum-fila.atendidasComum
-        color(f'quantidade de pessoas atendidas: {atendimentos}','032;1')
-        color(f'tamanho da fila de prioridade: {prioridade}','032;1')
-        color(f'tamanho da fila de comum: {comum}','032;1')
-        input('pressione qualquer tecla para continuar...')
-    elif opc == '5':
-        if fila.empty():
-
-            return True
-        else:
-            color('Ainda existe pessoas que não foram atendidas','031;1') 
-            input('pressione qualquer tecla para continuar...')
-
-    else:
-        color('Opção incorreta!','031;1')
-        input('pressione qualquer tecla para continuar...')
-
+        print(f'\033[{cor}m{txt}\033[m')
 
 #teste
 
@@ -165,6 +109,7 @@ def menu(fila):
 #a parte principal vai ser aqui mas vou deixar comentado
 
 if __name__ == '__main__':
+    menu = menu_module.Menu()
     fila = Priority_Queue()
     while True:
         os.system('cls' if os.name == 'nt' else 'clear')
