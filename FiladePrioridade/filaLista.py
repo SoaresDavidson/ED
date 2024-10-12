@@ -1,12 +1,11 @@
 import os
 class Pessoa:
+    #peso = nivel de prioridade
     peso = 0
     def __init__(self,nome,idade):
         self.next = None
         self.nome = nome
         self.idade = int(idade)
-
-        
 
 class Priority_Queue:
     def __init__(self):
@@ -65,17 +64,19 @@ class Priority_Queue:
             return 
         atual = self.head
         anterior = None 
-        while atual is not None:
-            if  pessoa.peso > atual.peso:
-                break
+        
+        while atual is not None and pessoa.peso <= atual.peso:
             anterior = atual
             atual = atual.next
+
         if anterior is None:
             pessoa.next = self.head
             self.head = pessoa   
+
         else:
             pessoa.next = atual   
             anterior.next = pessoa 
+
         if pessoa.next is None:
             self.back = pessoa    
             
@@ -101,6 +102,7 @@ class Priority_Queue:
 def color(txt,cor):
     print(f'\033[{cor}m{txt}\033[m')
 
+
 def menu(fila):
     color('='*30,'034')
     color(f'{"ATENDIMENTO":-^30}','037;1')
@@ -110,7 +112,7 @@ def menu(fila):
 3) Listar pessoas da fila.
 4) Situação atual da fila.
 5) sair''','034;1')
-    opc = str(input('escola uma opção: ')).strip()
+    opc = str(input('escolha uma opção: ')).strip()
     if opc == '1':
         nome = str(input('digite o nome da pessoa: ')).strip()
         while True:
