@@ -43,9 +43,6 @@ class Priority_Queue:
 
     def empty(self):
         return self.head is None
-        #if self.head is not None:
-        #    return False
-        #return True
 
     def pop_front(self):
         if not self.empty():
@@ -103,10 +100,6 @@ class Priority_Queue:
 def color(txt,cor):
         print(f'\033[{cor}m{txt}\033[m')
 
-#teste
-
-
-#a parte principal vai ser aqui mas vou deixar comentado
 
 if __name__ == '__main__':
     menu = menu_module.Menu()
@@ -115,9 +108,12 @@ if __name__ == '__main__':
         os.system('cls' if os.name == 'nt' else 'clear')
         if menu.menu(fila):
             break
-        
-    color('Atendimento encerrado','032;1')
-    color('Estátisticas: ','032;1')
-    color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
-    color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
-    color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+
+    try:    
+        color('Atendimento encerrado','032;1')
+        color('Estátisticas: ','032;1')
+        color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
+        color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+        color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+    except:
+        color('Não apareceu nenhuma pessoa hoje','031;1')    
