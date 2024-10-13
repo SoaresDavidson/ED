@@ -64,7 +64,19 @@ class Menu:
         self.color(f'Tamanho da fila comum: {comum}', '032;1')
         input('Pressione qualquer tecla para continuar...')
 
-    def encerramento(self,fila):
+    def encerramento(self,fila,mode_array=False):
+        if mode_array:
+            try:
+                self.color('Atendimento encerrado','032;1')
+                self.color('Estátisticas: ','032;1')
+                self.color(f'Atendimentos: {fila.get_atendidos()}','034;1')
+                self.color(f'Percentual fila prioritária: {(fila.get_atendidos_prioridade()/(fila.get_atendidos()))*100:.2f}%','034;1')
+                self.color(f'Percentual fila comum: {(fila.get_atendidos_comum()/(fila.get_atendidos()))*100:.2f}%','034;1')
+            except:
+                self.color('Não apareceu nenhuma pessoa hoje','031;1')   
+
+            return 
+
             try:    
                 self.color('Atendimento encerrado','032;1')
                 self.color('Estátisticas: ','032;1')
@@ -91,7 +103,7 @@ class Menu:
             self.situacao_fila(fila)
         elif opc == '5':
             if self.sair(fila):
-                self.encerramento(fila)
+                self.encerramento(fila,self.mode_array)
                 return True
             else:
                 self.color('Ainda há pessoas que não foram atendidas', '031;1')

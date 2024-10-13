@@ -142,18 +142,30 @@ class PriorityQueue():
         return count
 
     def get_atendidos(self):
+        return self.get_atendidos_prioridade() + self.get_atendidos_comum()
+
+    def get_atendidos_prioridade(self):
         count = 0
         for i in self.prioridades:
             count += i.getAttended()
-        count += self.comuns.getAttended()
         return count
+
+    def get_atendidos_comum(self):
+        return self.comuns.getAttended()     
     
     def __str__(self):
         res = ""
-        for i in self.prioridades:
-            res += str(i)
-        res += str(self.comuns)
-        return res[:-3]
+        for arrays in self.prioridades:
+            for pessoa in arrays.elem:
+                if pessoa:
+                    res += f'{pessoa.nome}: {pessoa.idade} anos, ' 
+        for pessoa in self.comuns.elem:     
+            if pessoa:   
+                res += f'{pessoa.nome}: {pessoa.idade} anos, ' 
+
+        if res:
+            res = res[:-2]
+        return res
 
 print("Bem-vindo à fila de prioridade com array")    
 
@@ -173,6 +185,7 @@ fila = PriorityQueue(cente, nona, octa, septa, sexa, comuns)
 menu = menu_module.Menu(True)
 
 while True:
+    os.system('cls' if os.name == 'nt' else 'clear')
     if menu.executar(fila): break
 
 #try: 
