@@ -77,14 +77,14 @@ class Menu:
 
             return 
 
-            try:    
-                self.color('Atendimento encerrado','032;1')
-                self.color('Estátisticas: ','032;1')
-                self.color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
-                self.color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
-                self.color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
-            except:
-                self.color('Não apareceu nenhuma pessoa hoje','031;1')
+        try:    
+            self.color('Atendimento encerrado','032;1')
+            self.color('Estátisticas: ','032;1')
+            self.color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
+            self.color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+            self.color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
+        except:
+            self.color('Não apareceu nenhuma pessoa hoje','031;1')
 
     def sair(self,fila):
         return fila.empty()
