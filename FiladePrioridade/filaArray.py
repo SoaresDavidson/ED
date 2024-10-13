@@ -97,7 +97,7 @@ ciclo = itertools.cycle(lista)
 while True:
     os.system('cls' if os.name == 'nt' else 'clear')
     menu = menu_module.Menu_Array()
-    if menu.executar(prioridades + [comuns]): 
+    if menu.executar(prioridades + [comuns],ciclo): 
         break
 
 try: 

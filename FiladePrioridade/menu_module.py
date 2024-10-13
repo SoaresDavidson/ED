@@ -74,7 +74,7 @@ class Menu:
         elif opc == '4':
             self.situacao_fila(fila)
         elif opc == '5':
-            if self.sair():
+            if self.sair(fila):
                 return True
             else:
                 self.color('Ainda há pessoas que não foram atendidas', '031;1')
@@ -208,7 +208,7 @@ class Menu_Array(Menu):
         elif opc == '4':
             self.situacao_fila(fila)
         elif opc == '5':
-            if self.sair():
+            if self.sair(fila):
                 return True
             else:
                 self.color('Ainda há pessoas que não foram atendidas', '031;1')
