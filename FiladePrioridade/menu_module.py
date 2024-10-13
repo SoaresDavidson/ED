@@ -1,5 +1,8 @@
 import itertools,os
 class Menu:
+    def __init__(self, mode_array = False):
+        self.mode_array = mode_array
+
     def color(self, txt, cor):
         """Aplica cores ao texto para a interface do menu."""
         print(f'\033[{cor}m{txt}\033[m')
@@ -48,19 +51,20 @@ class Menu:
 
     def situacao_fila(self, fila):
         """Mostra a situação atual da fila."""
-        atendimentos = fila.atendidasComum + fila.atendidasPrioridade
-        prioridade = fila.size_prioridade
-        comum = fila.size_comum
-        self.color(f'Quantidade de pessoas atendidas: {atendimentos}', '032;1')
-        self.color(f'Tamanho da fila de prioridade: {prioridade}', '032;1')
-        self.color(f'Tamanho da fila comum: {comum}', '032;1')
-        input('Pressione qualquer tecla para continuar...')
+        if self.mode_array:
+            pass
+        else:
+            atendimentos = fila.atendidasComum + fila.atendidasPrioridade
+            prioridade = fila.size_prioridade
+            comum = fila.size_comum
+            self.color(f'Quantidade de pessoas atendidas: {atendimentos}', '032;1')
+            self.color(f'Tamanho da fila de prioridade: {prioridade}', '032;1')
+            self.color(f'Tamanho da fila comum: {comum}', '032;1')
+            input('Pressione qualquer tecla para continuar...')
 
     def sair(self,fila):
-        if fila.empty():
-            return True
-        return False        
-
+        return fila.empty()
+  
     def executar(self, fila):
         self.exibir_menu()
         opc = self.escolher_opcao()
