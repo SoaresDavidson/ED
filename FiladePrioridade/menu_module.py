@@ -124,10 +124,9 @@ class Menu_Array(Menu):
         self.color(f'{"ATENDER PESSOA":-^30}', '037;1')
         self.color('=' * 30, '034')
 
-        
-        turno = next(fila[-1])  
+        turno = next(ciclo) 
         if turno == 'C':
-            if not fila[5].attend():
+            if not fila[5].attend():  
                 self.color("Fila comum vazia!", '031;1')
         else:
             for i in range(5):  
@@ -139,6 +138,7 @@ class Menu_Array(Menu):
                     self.color("Todas as filas estão vazias!", '031;1')
 
         input('Pressione qualquer tecla para continuar...')
+
 
     def listar_pessoas(self, fila):
         self.color('=' * 30, '034')

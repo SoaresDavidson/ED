@@ -95,12 +95,12 @@ lista = ['C', 'P', 'P']
 ciclo = itertools.cycle(lista)
 
 while True:
+    os.system('cls' if os.name == 'nt' else 'clear')
     menu = menu_module.Menu_Array()
     if menu.executar(prioridades + [comuns]): 
         break
 
-try:
-    
+try: 
     atendidos_prioridade = sum(fila.getAttended() for fila in prioridades)
     atendidos_comum = comuns.getAttended()
 
