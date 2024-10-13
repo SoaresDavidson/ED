@@ -1,4 +1,4 @@
-from filaArray import Pessoa
+
 class Menu:
     def color(self, txt, cor):
         """Aplica cores ao texto para a interface do menu."""
@@ -87,6 +87,7 @@ class Menu:
 
 class Menu_Array(Menu):
     def inserir_pessoa(self, fila):
+        from filaArray import Pessoa
         self.color('=' * 30, '034')
         self.color(f'{"INSERIR PESSOA":-^30}', '037;1')
         self.color('=' * 30, '034')

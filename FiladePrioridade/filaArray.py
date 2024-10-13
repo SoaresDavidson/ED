@@ -94,14 +94,13 @@ prioridades = [cente, nona, octa, septa, sexa]
 lista = ['C', 'P', 'P']
 ciclo = itertools.cycle(lista)
 
-# Passando prioridades e fila comum separadamente
 while True:
     menu = menu_module.Menu_Array()
-    if menu.executar(prioridades + [comuns]):  # Unindo prioridades e comuns
+    if menu.executar(prioridades + [comuns]): 
         break
 
 try:
-    # Calculando os atendimentos prioritários corretamente
+    
     atendidos_prioridade = sum(fila.getAttended() for fila in prioridades)
     atendidos_comum = comuns.getAttended()
 
