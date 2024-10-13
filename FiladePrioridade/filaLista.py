@@ -80,7 +80,7 @@ class Priority_Queue:
             
     def adicionar_comum(self,pessoa):
         self.filaComum+=1
-        if self.back is None:
+        if self.head is None:
             self.head = pessoa
             self.back = pessoa
         else:
