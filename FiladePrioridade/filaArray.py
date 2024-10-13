@@ -1,4 +1,4 @@
-import itertools,os,menu_module
+import itertools, os, menu_module
 
 class Pessoa():
     def __init__(self, nome, idade):
@@ -41,12 +41,10 @@ class Array():
         return i
     
     def isFull(self):
-        if self.filled() == self.lim: return True
-        return False
+        return self.filled() == self.lim
     
     def isEmpty(self):
-        if self.filled() == 0: return True
-        return False
+        return self.filled() == 0
     
     def add(self, elem: 'Pessoa'):
         if not self.isFull():
@@ -72,10 +70,11 @@ class Array():
         return False
     
     def __str__(self):
-        res =""
+        res = ""
         i = self.head
         while i != self.tail:
-            if i == self.lim: i = 0
+            if i == self.lim: 
+                i = 0
             res += str(self.elem[i]) + ", "
             i += 1
         if i != self.head:
@@ -83,9 +82,9 @@ class Array():
         return res
 
 
-print("Bem vindo à fila de prioridade com array")    
+print("Bem-vindo à fila de prioridade com array")    
 x = int(input("Qual o tamanho das filas a serem feitas? "))
-comuns =  Array(x)
+comuns = Array(x)
 sexa = Array(x)
 septa = Array(x)
 octa = Array(x)
@@ -95,15 +94,21 @@ prioridades = [cente, nona, octa, septa, sexa]
 lista = ['C', 'P', 'P']
 ciclo = itertools.cycle(lista)
 
-
+# Passando prioridades e fila comum separadamente
 while True:
-    menu = Menu_Array()
-    if menu.executar(fila):
+    menu = menu_module.Menu_Array()
+    if menu.executar(prioridades + [comuns]):  # Unindo prioridades e comuns
         break
+
 try:
-    print(f"Relação Atendimentos Prioridade/Total: {(i/(i + comuns.getAttended()) * 100):.2f}%")
-except:
-    print("Filas vazias. Programa encerrando")
+    # Calculando os atendimentos prioritários corretamente
+    atendidos_prioridade = sum(fila.getAttended() for fila in prioridades)
+    atendidos_comum = comuns.getAttended()
 
-
-                
+    if atendidos_comum + atendidos_prioridade > 0:
+        print(f"Relação Atendimentos Prioridade/Total: {(atendidos_prioridade / (atendidos_prioridade + atendidos_comum) * 100):.2f}%")
+    else:
+        print("Nenhum atendimento realizado")
+except Exception as e:
+    print(f"Erro: {e}")
+    print("Filas vazias. Programa encerrando.")
