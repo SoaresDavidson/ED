@@ -1,4 +1,4 @@
-import itertools
+import itertools,os,menu_module
 
 class Pessoa():
     def __init__(self, nome, idade):
@@ -95,71 +95,15 @@ prioridades = [cente, nona, octa, septa, sexa]
 lista = ['C', 'P', 'P']
 ciclo = itertools.cycle(lista)
 
-while True:
-    print("Digite:\n1 - Adicionar pessoa à fila\n2 - Atender pessoa\n3 - Listar filas\n4 - Gerar informações\n5 - Sair (somente se todas as filas estiverem vazias)")
-    x = int(input(""))
 
-    if x == 1:
-        nome = input("Digite o nome da pessoa ")
-        idade = int(input("Digite a idade "))
-        pessoa = Pessoa(nome, idade)
-        if idade >= 100:
-            cente.add(pessoa)
-        elif idade >= 90:
-            nona.add(pessoa)
-        elif idade >= 80:
-            octa.add(pessoa)
-        elif idade >= 70:
-            septa.add(pessoa)
-        elif idade >= 60:
-            sexa.add(pessoa)
-        else:
-            comuns.add(pessoa)
-    elif x == 2:
-        turno = next(ciclo)
-        if turno == 'C':
-            if not comuns.attend(): print("Filas vazias") 
-        else:
-            if not cente.isEmpty():
-                cente.attend()
-            elif not nona.isEmpty():
-                nona.attend()
-            elif not octa.isEmpty():
-                octa.attend()
-            elif not septa.isEmpty():
-                septa.attend()
-            elif not sexa.isEmpty():
-                sexa.attend()
-            else:
-                if not comuns.attend(): print("Filas vazias") 
-    elif x == 3:
-        for elem in prioridades:
-            print(elem, end="")
-        print(comuns, end="")
-    elif x == 4:
-        print(f"Antedimentos comuns realizados: {comuns.getAttended()}. Resta atender: {comuns.filled()}")
-        i = 0
-        j = 0
-        for elem in prioridades:
-            i += elem.getAttended()
-            j += elem.filled()
-        print(f"Atendimentos prioritários realizados: {i}. Resta atender: {j}")
-    else:
-        for elem in prioridades:
-            if not elem.isEmpty(): 
-                print("Impossível finalizar. Ainda há clientes prioridade aguardando")
-                continue
-        if not comuns.isEmpty(): 
-            print("Impossível finalizar. Ainda há clientes comuns aguardando atendimento")
-            continue
-        i = 0
-        for elem in prioridades:
-            i += elem.getAttended()
-        print(f"Atendimentos comuns: {comuns.getAttended()}; Atendimentos prioritários: {i}")
-        try:
-            print(f"Relação Atendimentos Prioridade/Total: {(i/(i + comuns.getAttended()) * 100):.2f}%")
-        except:
-            print("Filas vazias. Programa encerrando")
+while True:
+    menu = Menu_Array()
+    if menu.executar(fila):
         break
+try:
+    print(f"Relação Atendimentos Prioridade/Total: {(i/(i + comuns.getAttended()) * 100):.2f}%")
+except:
+    print("Filas vazias. Programa encerrando")
+
 
                 
