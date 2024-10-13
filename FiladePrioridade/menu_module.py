@@ -194,24 +194,25 @@ class Menu_Array(Menu):
         return True
 
     def executar(self, fila,ciclo):
-        self.exibir_menu()
-        opc = self.escolher_opcao()
+        while True:
+            self.exibir_menu()
+            opc = self.escolher_opcao()
 
-        if opc == '1':
-            self.inserir_pessoa(fila)
-        elif opc == '2':
-            self.atender_pessoa(fila,ciclo)
-        elif opc == '3':
-            self.listar_pessoas(fila)
-        elif opc == '4':
-            self.situacao_fila(fila)
-        elif opc == '5':
-            if self.sair(fila):
-                return True
+            if opc == '1':
+                self.inserir_pessoa(fila)
+            elif opc == '2':
+                self.atender_pessoa(fila,ciclo)
+            elif opc == '3':
+                self.listar_pessoas(fila)
+            elif opc == '4':
+                self.situacao_fila(fila)
+            elif opc == '5':
+                if self.sair(fila):
+                    break
+                else:
+                    self.color('Ainda há pessoas que não foram atendidas', '031;1')
+                    input('Pressione qualquer tecla para continuar...')    
+                    
             else:
-                self.color('Ainda há pessoas que não foram atendidas', '031;1')
+                self.color('Opção incorreta!', '031;1')
                 input('Pressione qualquer tecla para continuar...')    
-                
-        else:
-            self.color('Opção incorreta!', '031;1')
-            input('Pressione qualquer tecla para continuar...')    
