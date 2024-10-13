@@ -57,8 +57,8 @@ class Menu:
             comum = fila.get_size_comum()
         else:
             atendimentos = fila.atendidasComum + fila.atendidasPrioridade
-            prioridade = fila.size_prioridade
-            comum = fila.size_comum
+            prioridade = fila.size_prioridade()
+            comum = fila.size_comum()
         self.color(f'Quantidade de pessoas atendidas: {atendimentos}', '032;1')
         self.color(f'Tamanho da fila de prioridade: {prioridade}', '032;1')
         self.color(f'Tamanho da fila comum: {comum}', '032;1')
