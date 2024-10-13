@@ -46,7 +46,8 @@ class Array():
     def isEmpty(self):
         return self.filled() == 0
     
-    def add(self, elem: 'Pessoa'):
+    def add(self, nome,idade):
+        elem = Pessoa(nome,idade)
         if not self.isFull():
             if self.tail == self.lim:
                 self.tail = 0

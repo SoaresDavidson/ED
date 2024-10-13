@@ -99,22 +99,20 @@ class Menu_Array(Menu):
                 idade = int(idade)
                 break
             self.color('Insira uma idade válida!', '031;1')
-
-        pessoa = Pessoa(nome, idade)
         
        
         if idade >= 100:
-            fila[0].add(pessoa)  
+            fila[0].add(nome,idade)  
         elif idade >= 90:
-            fila[1].add(pessoa)  
+            fila[1].add(nome,idade)  
         elif idade >= 80:
-            fila[2].add(pessoa)  
+            fila[2].add(nome,idade)  
         elif idade >= 70:
-            fila[3].add(pessoa) 
+            fila[3].add(nome,idade) 
         elif idade >= 60:
-            fila[4].add(pessoa)  
+            fila[4].add(nome,idade)  
         else:
-            fila[5].add(pessoa)  
+            fila[5].add(nome,idade)  
 
         self.color(f'{nome} foi adicionado à fila!', '032')
         input('Pressione qualquer tecla para continuar...')
