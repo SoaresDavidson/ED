@@ -120,6 +120,7 @@ class Menu_Array(Menu):
         input('Pressione qualquer tecla para continuar...')
 
     def atender_pessoa(self, fila):
+        global ciclo
         self.color('=' * 30, '034')
         self.color(f'{"ATENDER PESSOA":-^30}', '037;1')
         self.color('=' * 30, '034')
