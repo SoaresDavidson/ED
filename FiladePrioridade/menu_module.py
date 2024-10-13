@@ -1,4 +1,4 @@
-import itertools
+import itertools,os
 class Menu:
     def color(self, txt, cor):
         """Aplica cores ao texto para a interface do menu."""
@@ -195,6 +195,7 @@ class Menu_Array(Menu):
 
     def executar(self, fila,ciclo):
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             self.exibir_menu()
             opc = self.escolher_opcao()
 
