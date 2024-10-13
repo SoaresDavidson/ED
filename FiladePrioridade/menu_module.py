@@ -1,4 +1,4 @@
-
+import itertools
 class Menu:
     def color(self, txt, cor):
         """Aplica cores ao texto para a interface do menu."""
