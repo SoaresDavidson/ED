@@ -87,7 +87,6 @@ class Menu:
 
 class Menu_Array(Menu):
     def inserir_pessoa(self, fila):
-        from filaArray import Pessoa
         self.color('=' * 30, '034')
         self.color(f'{"INSERIR PESSOA":-^30}', '037;1')
         self.color('=' * 30, '034')
@@ -217,3 +216,5 @@ class Menu_Array(Menu):
             else:
                 self.color('Opção incorreta!', '031;1')
                 input('Pressione qualquer tecla para continuar...')    
+                
+               
