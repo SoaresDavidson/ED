@@ -119,8 +119,7 @@ class Menu_Array(Menu):
         self.color(f'{nome} foi adicionado à fila!', '032')
         input('Pressione qualquer tecla para continuar...')
 
-    def atender_pessoa(self, fila):
-        global ciclo
+    def atender_pessoa(self, fila,ciclo):
         self.color('=' * 30, '034')
         self.color(f'{"ATENDER PESSOA":-^30}', '037;1')
         self.color('=' * 30, '034')
@@ -195,3 +194,26 @@ class Menu_Array(Menu):
         self.color(f'Atendimentos comuns: {atendimentos_comum}', '034;1')
         self.color(f'Atendimentos prioritários: {atendimentos_prioridade}', '034;1')
         return True
+
+    def executar(self, fila,ciclo):
+        self.exibir_menu()
+        opc = self.escolher_opcao()
+
+        if opc == '1':
+            self.inserir_pessoa(fila)
+        elif opc == '2':
+            self.atender_pessoa(fila,ciclo)
+        elif opc == '3':
+            self.listar_pessoas(fila)
+        elif opc == '4':
+            self.situacao_fila(fila)
+        elif opc == '5':
+            if self.sair():
+                return True
+            else:
+                self.color('Ainda há pessoas que não foram atendidas', '031;1')
+                input('Pressione qualquer tecla para continuar...')    
+                
+        else:
+            self.color('Opção incorreta!', '031;1')
+            input('Pressione qualquer tecla para continuar...')    
