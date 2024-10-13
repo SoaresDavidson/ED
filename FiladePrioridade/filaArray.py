@@ -21,6 +21,7 @@ class Array():
         self.tail = 0
         self.lim = lim
         self.attended = 0
+        self.size = 0
 
     def getId(self, id):
         return self.elem[id]
@@ -34,6 +35,12 @@ class Array():
     def getAttended(self):
         return self.attended
     
+    def getSize(self):
+        return self.size
+
+    def hasReachedLim(self, describer):
+        return describer == self.lim
+
     def filled(self):
         i = 0
         for _ in range(self.lim):
@@ -43,33 +50,35 @@ class Array():
     def isFull(self):
         return self.filled() == self.lim
     
-    def isEmpty(self):
+    def empty(self):
         return self.filled() == 0
     
-    def add(self, nome,idade):
+    def push(self, nome, idade):
         elem = Pessoa(nome,idade)
-        if not self.isFull():
-            if self.tail == self.lim:
-                self.tail = 0
-                self.elem[0] = elem
-            else:
-                self.elem[self.tail] = elem
-                self.tail += 1
-            return True
-        return False
+        if self.isFull(): return False
+        
+        self.elem[self.tail] = elem
+        self.tail += 1
+
+        if self.hasReachedLim(self.tail): self.tail = 0
+        self.size += 1
+        return True
     
-    def attend(self):
-        if not self.isEmpty():
-            if self.head == self.lim:
-                self.elem[self.lim - 1] = None
-                self.head = 0
-            else:
-                self.elem[self.head] = None
-                self.head += 1
-            self.attended += 1
-            return True
-        return False
+    def pop_front(self):
+        if self.empty(): return
+
+        aux = self.elem[self.head]
+
+        self.elem[self.head] = None
+        self.head += 1
+
+        if self.hasReachedLim(self.head): self.head = 0
+
+        self.size -= 1
+        self.attended += 1
+        return aux
     
+
     def __str__(self):
         res = ""
         i = self.head
@@ -81,9 +90,74 @@ class Array():
         if i != self.head:
             res += '\n'
         return res
+    
+class PriorityQueue():
+    def __init__(self,cente:Array, nona:Array, octa:Array, septa:Array, sexa:Array, comuns:Array):
+        self.prioridades = [cente, nona, octa, septa, sexa]
+        self.comuns = comuns
 
+    def empty(self):
+        for i in self.prioridades: 
+            if not i.empty(): 
+                return False
+
+        if not self.comuns.empty(): return False
+
+        return True
+            
+    def push(self, nome, idade):
+        if idade >= 100:
+            self.prioridades[0].push(nome,idade)
+        elif idade >= 90:
+            self.prioridades[1].push(nome,idade)
+        elif idade >= 80:
+            self.prioridades[2].push(nome,idade)
+        elif idade >= 70:
+            self.prioridades[3].push(nome,idade)
+        elif idade >= 60:
+            self.prioridades[4].push(nome, idade)
+        else:
+            self.comuns.push(nome, idade)
+        
+    def pop_front(self):
+        #o menu checa se a fila está vazia ou essa checagem adcional é so para achar
+        #qual fila tem pessoa, mas é garantido que esse metodo so executa quando a fila tem gente
+        for filaPrioridade in self.prioridades:
+            if not filaPrioridade.empty(): 
+                return filaPrioridade.pop_front()
+            
+        if not self.comuns.empty(): 
+            return self.comuns.pop_front()
+
+        return False
+    
+
+    def get_size_comum(self):
+        return self.comuns.getSize()
+
+    def get_size_prioridade(self):
+        count = 0
+        for i in self.prioridades:
+            count += i.getSize()
+        return count
+
+    def get_atendidos(self):
+        count = 0
+        for i in self.prioridades:
+            count += i.getAttended()
+        count += self.comuns.getAttended()
+        return count
+    
+    def __str__(self):
+        res = ""
+        for i in self.prioridades:
+            res += str(i)
+        res += str(self.comuns)
+        return res[:-3]
 
 print("Bem-vindo à fila de prioridade com array")    
+
+
 x = int(input("Qual o tamanho das filas a serem feitas? "))
 comuns = Array(x)
 sexa = Array(x)
@@ -91,23 +165,24 @@ septa = Array(x)
 octa = Array(x)
 nona = Array(x)
 cente = Array(x)
-prioridades = [cente, nona, octa, septa, sexa]
+
 lista = ['C', 'P', 'P']
 ciclo = itertools.cycle(lista)
 
+fila = PriorityQueue(cente, nona, octa, septa, sexa, comuns)
+menu = menu_module.Menu(True)
 
+while True:
+    if menu.executar(fila): break
 
-menu = menu_module.Menu_Array()
-menu.executar(prioridades + [comuns],ciclo)
-
-try: 
-    atendidos_prioridade = sum(fila.getAttended() for fila in prioridades)
-    atendidos_comum = comuns.getAttended()
-
-    if atendidos_comum + atendidos_prioridade > 0:
-        print(f"Relação Atendimentos Prioridade/Total: {(atendidos_prioridade / (atendidos_prioridade + atendidos_comum) * 100):.2f}%")
-    else:
-        print("Nenhum atendimento realizado")
-except Exception as e:
-    print(f"Erro: {e}")
-    print("Filas vazias. Programa encerrando.")
+#try: 
+ #   atendidos_prioridade = sum(fila.getAttended() for fila in prioridades)
+  #  atendidos_comum = comuns.getAttended()
+#
+ #   if atendidos_comum + atendidos_prioridade > 0:
+  #      print(f"Relação Atendimentos Prioridade/Total: {(atendidos_prioridade / (atendidos_prioridade + atendidos_comum) * 100):.2f}%")
+   # else:
+   #     print("Nenhum atendimento realizado")
+#except Exception as e:
+#    print(f"Erro: {e}")
+#    print("Filas vazias. Programa encerrando.")

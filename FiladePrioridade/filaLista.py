@@ -109,12 +109,3 @@ if __name__ == '__main__':
         if menu.executar(fila):
             break
 
-    try:    
-        color('Atendimento encerrado','032;1')
-        color('Estátisticas: ','032;1')
-        color(f'Atendimentos: {fila.atendidasComum+fila.atendidasPrioridade}','034;1')
-        color(f'Percentual fila prioritária: {(fila.filaPrioridade/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
-        color(f'Percentual fila comum: {(fila.filaComum/(fila.filaComum+fila.filaPrioridade))*100:.2f}%','034;1')
-    except:
-        color('Não apareceu nenhuma pessoa hoje','031;1')    
-
