@@ -21,6 +21,7 @@ class Array():
         self.tail = 0
         self.lim = lim
         self.attended = 0
+        self.size = 0
 
     def getId(self, id):
         return self.elem[id]
@@ -34,6 +35,9 @@ class Array():
     def getAttended(self):
         return self.attended
     
+    def getSize(self):
+        return self.size
+
     def hasReachedLim(self, describer):
         return describer == self.lim
 
@@ -57,6 +61,7 @@ class Array():
         self.tail += 1
 
         if self.hasReachedLim(self.tail): self.tail = 0
+        self.size += 1
         return True
     
     def pop_front(self):
@@ -69,9 +74,10 @@ class Array():
 
         if self.hasReachedLim(self.head): self.head = 0
 
+        self.size -= 1
         self.attended += 1
         return aux
-        
+    
 
     def __str__(self):
         res = ""
@@ -125,12 +131,29 @@ class PriorityQueue():
 
         return False
     
+
+    def get_size_comum(self):
+        return self.comuns.getSize()
+
+    def get_size_prioridade(self):
+        count = 0
+        for i in self.prioridades:
+            count += i.getSize()
+        return count
+
+    def get_atendidos(self):
+        count = 0
+        for i in self.prioridades:
+            count += i.getAttended()
+        count += self.comuns.getAttended()
+        return count
+    
     def __str__(self):
         res = ""
         for i in self.prioridades:
             res += str(i)
         res += str(self.comuns)
-        return res
+        return res[:-3]
 
 print("Bem-vindo à fila de prioridade com array")    
 
