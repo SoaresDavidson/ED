@@ -29,6 +29,11 @@ class Menu:
                 idade = int(idade)
                 break
             self.color('Insira uma idade válida', '031;1')
+
+        if self.mode_array and fila.isFulls():
+            self.color('fila está cheia','031;1')
+            input('Pressione qualquer tecla para continuar...')
+            return
         fila.push(nome, idade)
         self.color(f'{nome} foi adicionado à fila', '032')
         input('Pressione qualquer tecla para continuar...')

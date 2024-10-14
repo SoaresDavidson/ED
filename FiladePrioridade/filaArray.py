@@ -118,6 +118,10 @@ class PriorityQueue():
             self.prioridades[4].push(nome, idade)
         else:
             self.comuns.push(nome, idade)
+
+    def isFulls(self):
+        return ((self.prioridades[0].getSize() + self.prioridades[1].getSize() + self.prioridades[2].getSize()
+                + self.prioridades[3].getSize() + self.prioridades[4].getSize() + self.comuns.getSize()) == self.prioridades[0].lim)
         
     def pop_front(self):
         #o menu checa se a fila está vazia ou essa checagem adcional é so para achar
@@ -178,8 +182,8 @@ octa = Array(x)
 nona = Array(x)
 cente = Array(x)
 
-lista = ['C', 'P', 'P']
-ciclo = itertools.cycle(lista)
+#lista = ['C', 'P', 'P']
+#ciclo = itertools.cycle(lista)
 
 fila = PriorityQueue(cente, nona, octa, septa, sexa, comuns)
 menu = menu_module.Menu(True)
