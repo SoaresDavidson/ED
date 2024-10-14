@@ -31,7 +31,7 @@ class Menu:
             self.color('Insira uma idade válida', '031;1')
         fila.push(nome, idade)
         self.color(f'{nome} foi adicionado à fila', '032')
-        input('Pressione qualquer tecla para continuar...')
+        
 
     def atender_pessoa(self, fila):
         if not fila.empty():
@@ -39,7 +39,7 @@ class Menu:
             self.color(f'{pessoa} acabou de ser atendido', '032')
         else:
             self.color('Fila vazia', '031;1')
-        input('Pressione qualquer tecla para continuar...')
+        
 
     def listar_pessoas(self, fila):
         if not fila.empty():
@@ -47,7 +47,7 @@ class Menu:
             print(fila)
         else:
             self.color('Fila vazia', '031;1')
-        input('Pressione qualquer tecla para continuar...')
+        
 
     def situacao_fila(self, fila):
         """Mostra a situação atual da fila."""
@@ -62,7 +62,7 @@ class Menu:
         self.color(f'Quantidade de pessoas atendidas: {atendimentos}', '032;1')
         self.color(f'Tamanho da fila de prioridade: {prioridade}', '032;1')
         self.color(f'Tamanho da fila comum: {comum}', '032;1')
-        input('Pressione qualquer tecla para continuar...')
+        
 
     def encerramento(self,fila,mode_array=False):
         if mode_array:
@@ -107,8 +107,9 @@ class Menu:
                 return True
             else:
                 self.color('Ainda há pessoas que não foram atendidas', '031;1')
-                input('Pressione qualquer tecla para continuar...')    
+                    
                 
         else:
             self.color('Opção incorreta!', '031;1')
-            input('Pressione qualquer tecla para continuar...')
+            
+        input('Pressione qualquer tecla para continuar...') 
