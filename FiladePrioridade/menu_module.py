@@ -1,4 +1,4 @@
-import itertools,os
+import os
 class Menu:
     def __init__(self, mode_array = False):
         self.mode_array = mode_array
