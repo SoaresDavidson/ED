@@ -36,6 +36,77 @@ def insertionSort(arr):
             j -= 1
         arr[j+1] = value
 
+def merge_sort(array, left, right):
+    if left < right:
+        mid = (left + right) // 2  
+        merge_sort(array, left, mid)
+        merge_sort(array, mid + 1, right)
+
+        merge(array, left, mid, right)
+
+def merge(array, left, mid, right): 
+    left_half = array[left:mid + 1]
+    right_half = array[mid + 1:right + 1]
+    i = 0  
+    j = 0 
+    k = left  
+    while i < len(left_half) and j < len(right_half):
+        if left_half[i] <= right_half[j]:
+            array[k] = left_half[i] 
+            i += 1
+        else:
+            array[k] = right_half[j]
+            j += 1
+        k += 1   
+    while i < len(left_half):
+        array[k] = left_half[i]
+        i += 1
+        k += 1
+    while j < len(right_half):
+        array[k] = right_half[j]
+        j += 1
+        k += 1
+
+def bubble_sort(array):      
+    troca = False
+    while True:
+        troca = False
+        for i in range(len(array)-1):
+            if array[i] > array[i+1]:
+                troca = True
+                aux = array[i+1]
+                array[i+1] = array[i]
+                array[i] = aux
+        if troca is False:
+            break
+
+def quick_sort(array, ini, fim):
+    if ini >= fim:
+        return array
+    pivo = array[ini]
+    i, j = ini + 1, fim
+
+    while True:
+        while i <= j and unidecode.unidecode(array[i].lower()) <= unidecode.unidecode(pivo.lower()):
+            i += 1
+        while i <= j and unidecode.unidecode(array[j].lower()) >= unidecode.unidecode(pivo.lower()):
+            j -= 1
+        if i > j:
+            break
+        array[i], array[j] = array[j], array[i]
+
+    array[ini], array[j] = array[j], array[ini]
+
+    quick_sort(array, ini, j - 1)  
+    quick_sort(array, j + 1, fim)  
+    return array
+
+def quick(array):
+    from random import shuffle
+    shuffle(array)  
+    return quick_sort(array, 0, len(array) - 1)  
+
+
 if __name__ == "__main__":
     arr = ["s","o","r","t","e","x","a","m","p","l","e"]
     #insertionSort(arr)
