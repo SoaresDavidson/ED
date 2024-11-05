@@ -84,7 +84,7 @@ def merge(array:list, left:int, mid:int, right:int) -> None:
         k += 1
 
 @tictoc
-def bubble_sort(array) -> None:      
+def bubble_sort(array:list) -> None:      
     troca = False
     while True:
         troca = False
@@ -97,7 +97,7 @@ def bubble_sort(array) -> None:
         if troca is False:
             break
 
-def quick_sort(array, ini, fim) -> list:
+def quick_sort(array:list, ini:int, fim:int) -> list:
     if ini >= fim:
         return array
     pivo = array[ini]
@@ -128,9 +128,9 @@ def quick(array:list) -> list:
 if __name__ == "__main__":
     arr = ["s","o","r","t","e","x","a","m","p","l","e"]
     
-    insertionSort(arr)
+    #insertionSort(arr)
     #heapSort(arr)
     #quick(arr)
-    #merge_sort(arr, 0, len(arr)-1)
+    merge_sort(arr, 0, len(arr)-1)
     #print(arr)
     #print(*arr)
