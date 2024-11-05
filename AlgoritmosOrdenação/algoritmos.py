@@ -6,8 +6,8 @@ def tictoc(func):
         t1 = time.time()
         result = func(*args)
         t2 = time.time() - t1
-        print(f"{func.__name__} levou {t2} segundos")
-        return result
+        #print(f"{func.__name__} levou {t2:.4f} segundos")
+        return t2
     return wrapper
 
 
@@ -52,7 +52,9 @@ def insertionSort(arr: list) -> None:
         arr[j+1] = value
 
 @tictoc
-def merge_sort(array:list, left:int, right:int) -> None:
+def merge_sort(array:list, left:int = 0, right:int = None) -> None:
+    if right == None: right = len(array) - 1
+
     if left < right:
         mid = (left + right) // 2  
         merge_sort(array, left, mid)
