@@ -1,4 +1,17 @@
-def heapify(arr, n, i):
+import unidecode
+import time
+
+def tictoc(func):
+    def wrapper(*args):
+        t1 = time.time()
+        result = func(*args)
+        t2 = time.time() - t1
+        print(f"{func.__name__} levou {t2} segundos")
+        return result
+    return wrapper
+
+
+def heapify(arr:list, n:int, i:int) -> None:
     largest = i 
     
     l = 2 * i + 1 
@@ -16,7 +29,8 @@ def heapify(arr, n, i):
 
         heapify(arr, n, largest)
 
-def heapSort(arr):
+@tictoc
+def heapSort(arr:list) -> None:
     size = len(arr) 
 
     for i in range(size // 2 - 1, -1, -1):
@@ -27,8 +41,9 @@ def heapSort(arr):
         arr[0], arr[i] = arr[i], arr[0] 
 
         heapify(arr, i, 0)
-
-def insertionSort(arr):
+        
+@tictoc
+def insertionSort(arr: list) -> None:
     for i,value in enumerate(arr):  
         j = i-1
         while j >= 0 and value < arr[j]: 
@@ -36,7 +51,8 @@ def insertionSort(arr):
             j -= 1
         arr[j+1] = value
 
-def merge_sort(array, left, right):
+@tictoc
+def merge_sort(array:list, left:int, right:int) -> None:
     if left < right:
         mid = (left + right) // 2  
         merge_sort(array, left, mid)
@@ -44,7 +60,7 @@ def merge_sort(array, left, right):
 
         merge(array, left, mid, right)
 
-def merge(array, left, mid, right): 
+def merge(array:list, left:int, mid:int, right:int) -> None: 
     left_half = array[left:mid + 1]
     right_half = array[mid + 1:right + 1]
     i = 0  
@@ -67,7 +83,8 @@ def merge(array, left, mid, right):
         j += 1
         k += 1
 
-def bubble_sort(array):      
+@tictoc
+def bubble_sort(array) -> None:      
     troca = False
     while True:
         troca = False
@@ -80,7 +97,7 @@ def bubble_sort(array):
         if troca is False:
             break
 
-def quick_sort(array, ini, fim):
+def quick_sort(array, ini, fim) -> list:
     if ini >= fim:
         return array
     pivo = array[ini]
@@ -101,7 +118,8 @@ def quick_sort(array, ini, fim):
     quick_sort(array, j + 1, fim)  
     return array
 
-def quick(array):
+@tictoc
+def quick(array:list) -> list:
     from random import shuffle
     shuffle(array)  
     return quick_sort(array, 0, len(array) - 1)  
@@ -109,6 +127,10 @@ def quick(array):
 
 if __name__ == "__main__":
     arr = ["s","o","r","t","e","x","a","m","p","l","e"]
-    #insertionSort(arr)
-    heapSort(arr)
-    print(arr)
+    
+    insertionSort(arr)
+    #heapSort(arr)
+    #quick(arr)
+    #merge_sort(arr, 0, len(arr)-1)
+    #print(arr)
+    #print(*arr)
