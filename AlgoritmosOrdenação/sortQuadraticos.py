@@ -17,4 +17,4 @@ with open(nomes50k) as lista:
     
     print(f"insertion levou {tempo_insertion} segundos")
     print(f"heap levou {tempo_bubble} segundos")
-    #print(f"selection levou {tempo_selection} segundos")
+    #print(f"selection levou {tempo_selection} segundos") FODASE PORRAKKKKKKKKKKKKKKKK
