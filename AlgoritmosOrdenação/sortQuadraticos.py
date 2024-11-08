@@ -10,4 +10,4 @@ with open(nomes100k) as lista:
     arr_insertion = lista.readlines()
     arr_bubble = arr_insertion.copy()
     arr_selection = arr_insertion.copy()
-    
+

@@ -28,6 +28,20 @@ def heapify(arr:list, n:int, i:int) -> None:
         arr[i], arr[largest] = arr[largest], arr[i]  # Swap
 
         heapify(arr, n, largest)
+@tictoc
+def shellSort(nums):
+    h = 1
+    n = len(nums)
+    while h > 0:
+            for i in range(h, n):
+                c = nums[i]
+                j = i
+                while j >= h and c < nums[j - h]:
+                    nums[j] = nums[j - h]
+                    j = j - h
+                    nums[j] = c
+            h = int(h / 2.2)
+    return nums
 
 @tictoc
 def heapSort(arr:list) -> None:
