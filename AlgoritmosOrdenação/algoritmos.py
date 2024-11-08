@@ -6,7 +6,7 @@ def tictoc(func):
         t1 = time.time()
         result = func(*args)
         t2 = time.time() - t1
-        print(f"{func.__name__} levou {t2} segundos")
+        #print(f"{func.__name__} levou {t2} segundos")
         return t2
     return wrapper
 
@@ -30,8 +30,8 @@ def heapify(arr:list, n:int, i:int) -> None:
         heapify(arr, n, largest)
 @tictoc
 def shellSort(nums):
-    h = 1
     n = len(nums)
+    h = int (n//2)
     while h > 0:
             for i in range(h, n):
                 c = nums[i]
@@ -40,7 +40,7 @@ def shellSort(nums):
                     nums[j] = nums[j - h]
                     j = j - h
                     nums[j] = c
-            h = int(h / 2.2)
+            h = h // 2
     return nums
 
 @tictoc
@@ -147,7 +147,9 @@ def swap(arr, i, j):
 
 # The QuickSort function implementation
 @tictoc
-def quickSort(arr, low, high):
+def quickSort(arr, low=0, high=None):
+    if high is None:
+        high = len(arr) - 1
     if low < high:
         
         # pi is the partition return index of pivot
