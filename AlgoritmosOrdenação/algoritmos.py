@@ -6,7 +6,7 @@ def tictoc(func):
         t1 = time.time()
         result = func(*args)
         t2 = time.time() - t1
-        #print(f"{func.__name__} levou {t2:.4f} segundos")
+        print(f"{func.__name__} levou {t2} segundos")
         return t2
     return wrapper
 
@@ -100,45 +100,64 @@ def merge(array:list, left:int, mid:int, right:int) -> None:
         k += 1
 
 @tictoc
-def bubble_sort(array:list) -> None:      
-    troca = False
-    while True:
-        troca = False
-        for i in range(len(array)-1):
-            if array[i] > array[i+1]:
-                troca = True
-                aux = array[i+1]
-                array[i+1] = array[i]
-                array[i] = aux
-        if troca is False:
+def bubbleSort(arr):
+    n = len(arr)
+    
+    # Traverse through all array elements
+    for i in range(n):
+        swapped = False
+
+        # Last i elements are already in place
+        for j in range(0, n-i-1):
+
+            # Traverse the array from 0 to n-i-1
+            # Swap if the element found is greater
+            # than the next element
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]
+                swapped = True
+        if (swapped == False):
             break
 
-def quick_sort(array:list, ini:int, fim:int) -> list:
-    if ini >= fim:
-        return array
-    pivo = array[ini]
-    i, j = ini + 1, fim
-
-    while True:
-        while i <= j and unidecode.unidecode(array[i].lower()) <= unidecode.unidecode(pivo.lower()):
+def partition(arr, low, high):
+    
+    # Choose the pivot
+    pivot = arr[high]
+    
+    # Index of smaller element and indicates 
+    # the right position of pivot found so far
+    i = low - 1
+    
+    # Traverse arr[low..high] and move all smaller
+    # elements to the left side. Elements from low to 
+    # i are smaller after every iteration
+    for j in range(low, high):
+        if arr[j] < pivot:
             i += 1
-        while i <= j and unidecode.unidecode(array[j].lower()) >= unidecode.unidecode(pivo.lower()):
-            j -= 1
-        if i > j:
-            break
-        array[i], array[j] = array[j], array[i]
+            swap(arr, i, j)
+    
+    # Move pivot after smaller elements and
+    # return its position
+    swap(arr, i + 1, high)
+    return i + 1
 
-    array[ini], array[j] = array[j], array[ini]
+# Swap function
+def swap(arr, i, j):
+    arr[i], arr[j] = arr[j], arr[i]
 
-    quick_sort(array, ini, j - 1)  
-    quick_sort(array, j + 1, fim)  
-    return array
-
+# The QuickSort function implementation
 @tictoc
-def quick(array:list) -> list:
-    from random import shuffle
-    shuffle(array)  
-    return quick_sort(array, 0, len(array) - 1)  
+def quickSort(arr, low, high):
+    if low < high:
+        
+        # pi is the partition return index of pivot
+        pi = partition(arr, low, high)
+        
+        # Recursion calls for smaller elements
+        # and greater or equals elements
+        quickSort(arr, low, pi - 1)
+        quickSort(arr, pi + 1, high)
+
 
 
 if __name__ == "__main__":
