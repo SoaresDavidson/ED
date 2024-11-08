@@ -2,6 +2,8 @@ from algoritmos import quickSort, merge_sort, heapSort, shellSort
 import matplotlib.pyplot as plt
 import numpy as np
 import menu
+import matplotlib.pyplot as plt
+import numpy as np
 
 
 nomes50k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes50k.txt"
@@ -9,6 +11,7 @@ nomes100k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes100k.tx
 nomes250k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes250k.txt"
 nomes500k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes500k.txt"
 nomes1000k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes1000k.txt"
+
 
 arquivos = [nomes50k,nomes100k,nomes250k,nomes500k,nomes1000k]
 
@@ -56,3 +59,4 @@ plt.show()
 
 
 print(f"a media é {media:.2f}")
+

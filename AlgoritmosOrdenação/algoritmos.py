@@ -100,7 +100,7 @@ def merge(array:list, left:int, mid:int, right:int) -> None:
         k += 1
 
 @tictoc
-def bubbleSort(arr):
+def bubbleSort(arr:list):
     n = len(arr)
     
     # Traverse through all array elements
@@ -119,7 +119,7 @@ def bubbleSort(arr):
         if (swapped == False):
             break
 
-def partition(arr, low, high):
+def partition(arr:list, low:int, high:int):
     
     # Choose the pivot
     pivot = arr[high]
@@ -147,9 +147,10 @@ def swap(arr, i, j):
 
 # The QuickSort function implementation
 @tictoc
-def quickSort(arr, low=0, high=None):
-    if high is None:
-        high = len(arr) - 1
+
+
+def quickSort(arr:list, low:int = 0, high:int = None) -> None:
+    if high == None:high = len(arr) - 1
     if low < high:
         
         # pi is the partition return index of pivot
