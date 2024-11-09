@@ -147,8 +147,6 @@ def swap(arr, i, j):
 
 # The QuickSort function implementation
 @tictoc
-
-
 def quickSort(arr:list, low:int = 0, high:int = None) -> None:
     if high == None:high = len(arr) - 1
     if low < high:
@@ -160,7 +158,18 @@ def quickSort(arr:list, low:int = 0, high:int = None) -> None:
         # and greater or equals elements
         quickSort(arr, low, pi - 1)
         quickSort(arr, pi + 1, high)
-
+@tictoc
+def selectionSort(array):
+    size = len(array)
+    for ind in range(size):
+        min_index = ind
+ 
+        for j in range(ind + 1, size):
+            # select the minimum element in every iteration
+            if array[j] < array[min_index]:
+                min_index = j
+         # swapping the elements to sort the array
+        (array[ind], array[min_index]) = (array[min_index], array[ind])
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ def checa_se_ta_ordenando(arquivo:str, algoritmo):
     with open("checa.txt", "w", encoding="utf-8") as arq:
         arq.writelines(arr)
 
-def calcula_media(arquivo:str,algoritimo, quant:int = 5):
+def calcula_media(arquivo:str,algoritimo, quant:int = 1):
     sum = 0
     for i in range(quant):
         sum += realiza_operacao(arquivo, algoritimo)
