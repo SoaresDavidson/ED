@@ -59,7 +59,7 @@ plt.legend()
 
 
 plt.tight_layout()
-plt.savefig('grafico_barras_algoritmos.png')  
+plt.savefig('AlgoritmosOrdenação/Graficos/grafico_barras_algoritmos.png')  
 
 plt.close()
 
@@ -80,7 +80,7 @@ plt.xticks(x, ['50k', '100k', '250k', '500k', '1000k'])
 plt.legend()
 
 plt.tight_layout()
-plt.savefig('grafico_linhas_algoritmos.png')  
+plt.savefig('AlgoritmosOrdenação/Graficos/grafico_linhas_algoritmos.png')  
 
 plt.close()
-print("Os gráficos foram salvos como 'grafico_barras_algoritmos.png' e 'grafico_linhas_algoritmos.png'.")
+print("Os gráficos foram salvos como 'grafico_barras_algoritmos.png' e 'grafico_linhas_algoritmos.png' na pasta 'Graficos'.")

@@ -44,7 +44,7 @@ plt.xticks(x, ['50k', '100k', '250k', '500k', '1000k'])
 plt.legend()
 
 plt.tight_layout()
-plt.savefig('grafico_barras_algoritmos_quadraticos.png')
+plt.savefig('AlgoritmosOrdenação/Graficos/grafico_barras_algoritmos_quadraticos.png')
 plt.close()
 
 plt.plot(x, tempo_insertion, label='Insertion', marker='o', color='skyblue', linewidth=2)
@@ -59,7 +59,7 @@ plt.xticks(x, ['50k', '100k', '250k', '500k', '1000k'])
 plt.legend()
 
 plt.tight_layout()
-plt.savefig('grafico_linhas_algoritmos_quadraticos.png')
+plt.savefig('AlgoritmosOrdenação/Graficos/grafico_linhas_algoritmos_quadraticos.png')
 plt.close()
 
-print("Os gráficos foram salvos como 'grafico_barras_algoritmos_quadraticos.png' e 'grafico_linhas_algoritmos_quadraticos.png'.")
+print("Os gráficos foram salvos como 'grafico_barras_algoritmos_quadraticos.png' e 'grafico_linhas_algoritmos_quadraticos.png' na pasta 'Graficos'.")
