@@ -1,4 +1,3 @@
-import unidecode
 import time
 
 def tictoc(func):
