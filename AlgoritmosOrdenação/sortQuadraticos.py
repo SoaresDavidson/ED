@@ -9,7 +9,7 @@ nomes250k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes250k.tx
 nomes500k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes500k.txt"
 nomes1000k = "AlgoritmosOrdenação/dados-20241102T131234Z-001/dados/nomes1000k.txt"
 
-arquivos = [nomes50k,nomes100k,nomes250k,nomes500k]
+arquivos = [nomes50k, nomes100k, nomes250k, nomes500k, nomes1000k]
 
 tempo_bubble = list()
 tempo_insertion = list()
