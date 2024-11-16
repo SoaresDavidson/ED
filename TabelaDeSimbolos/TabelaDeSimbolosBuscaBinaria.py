@@ -1,5 +1,5 @@
 import string
-
+import re
 class Item:
     def __init__(self, key, value):
         self.key = key
@@ -39,13 +39,18 @@ class BinarySearchST:
             index += 1
         arr.insert(index, item)
 
+    def clean_word(self, word):
+        return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
+
+
     def read_from_file(self, filename):
         try:
             with open(filename, 'r') as file:
                 for line in file:
                     words = line.split()
                     for word in words:
-                        self.put(word, 0) 
+                        cleaned_word = self.clean_word(word)
+                        self.put(cleaned_word, 0) 
         except FileNotFoundError:
             print(f"Arquivo '{filename}' não encontrado.")
 
