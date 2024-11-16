@@ -1,0 +1,65 @@
+import string
+
+class Item:
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+    def __repr__(self):
+        return f'({self.key}: {self.value})'
+
+
+class BinarySearchST:
+    def __init__(self):
+        self.arr = []
+
+    def __repr__(self):
+        return f"BinarySearchST({self.arr})"
+
+    def put(self, k, value):
+        if not self.find(k, self.arr):
+            self.insertion(Item(k, value), self.arr)
+
+    def find(self, k, arr):
+        l = 0
+        r = len(arr) - 1
+        while l <= r:
+            mid = (r + l) // 2
+            if arr[mid].key < k:
+                l = mid + 1
+            elif arr[mid].key > k:
+                r = mid - 1
+            else:
+                return True
+        return False
+
+    def insertion(self, item, arr):
+        index = 0
+        while index < len(arr) and arr[index].key < item.key:
+            index += 1
+        arr.insert(index, item)
+
+    def read_from_file(self, filename):
+        try:
+            with open(filename, 'r') as file:
+                for line in file:
+                    words = line.split()
+                    for word in words:
+                        self.put(word, 0) 
+        except FileNotFoundError:
+            print(f"Arquivo '{filename}' não encontrado.")
+
+    def save_to_file(self, filename):
+        try:
+            with open(filename, 'w') as file:
+                for item in self.arr:
+                    file.write(f"{item.key}: {item.value}\n")
+            print(f"Tabela salva em '{filename}'.")
+        except Exception as e:
+            print(f"Erro ao salvar o arquivo: {e}")
+
+
+
+tabela = BinarySearchST()
+tabela.read_from_file("TabelaDeSimbolos/leipzig100k.txt")
+tabela.save_to_file("TabelaDeSimbolos/tabela_salva.txt")
