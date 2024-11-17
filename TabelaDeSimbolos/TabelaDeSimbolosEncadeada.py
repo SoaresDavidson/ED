@@ -4,14 +4,14 @@ class Node:
         self.valor = valor
         self.next = None
 
-class Tabela:
+class TabelaEncadeada:
     def __init__(self):
         self.ini = None
         self.valor = 0
     
-    def put(self, chave):
+    def put(self, chave, value = 0):
         if self.ini is None: 
-            self.ini = Node(chave, 0)
+            self.ini = Node(chave, value)
             self.valor = 1
         else:
             n = self.ini
