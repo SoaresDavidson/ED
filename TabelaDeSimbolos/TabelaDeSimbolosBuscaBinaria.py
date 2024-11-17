@@ -16,9 +16,11 @@ class BinarySearchST:
     def __repr__(self):
         return f"BinarySearchST({self.arr})"
 
-    def put(self, k, value):
-        if not self.find(k, self.arr):
-            self.insertion(Item(k, value), self.arr)
+    def put(self, k, value=0):
+        index = self.find(k,self.arr)
+        if index < len(self.arr) and self.arr[index].key == k:
+            return
+        self.arr.insert(index, Item(k,value)) 
 
     def find(self, k, arr):
         l = 0
@@ -30,14 +32,8 @@ class BinarySearchST:
             elif arr[mid].key > k:
                 r = mid - 1
             else:
-                return True
-        return False
-
-    def insertion(self, item, arr):
-        index = 0
-        while index < len(arr) and arr[index].key < item.key:
-            index += 1
-        arr.insert(index, item)
+                return mid
+        return l
 
     def clean_word(self, word):
         return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
@@ -50,7 +46,7 @@ class BinarySearchST:
                     words = line.split()
                     for word in words:
                         cleaned_word = self.clean_word(word)
-                        self.put(cleaned_word, 0) 
+                        self.put(cleaned_word) 
         except FileNotFoundError:
             print(f"Arquivo '{filename}' não encontrado.")
 
