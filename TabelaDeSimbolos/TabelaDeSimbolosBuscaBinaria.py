@@ -37,18 +37,6 @@ class BinarySearchST:
     def clean_word(self, word):
         return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-
-    def read_from_file(self, filename):
-        try:
-            with open(filename, 'r') as file:
-                for line in file:
-                    words = line.split()
-                    for word in words:
-                        cleaned_word = self.clean_word(word)
-                        self.put(cleaned_word) 
-        except FileNotFoundError:
-            print(f"Arquivo '{filename}' não encontrado.")
-
     def save_to_file(self, filename):
         try:
             with open(filename, 'w') as file:

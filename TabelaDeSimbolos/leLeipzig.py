@@ -10,14 +10,14 @@ def conta_tempo(func):
     return wrapper
 
 @conta_tempo
-def read_from_file(filename, tabela):
+def read_from_file(filename, tabela, value = 0):
     try:
         with open(filename, 'r') as file:
             for line in file:
                 words = line.split()
                 for word in words:
                     cleaned_word = clean_word(word)
-                    tabela.put(cleaned_word, 0) 
+                    tabela.put(cleaned_word, value) 
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
 
@@ -35,8 +35,8 @@ def save_to_file(filename, arr):
 def clean_word(word):
     return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-tabela = HashTable.tabelaHash(227)
-#tabela = TabelaDeSimbolosBuscaBinaria.BinarySearchST()
+#tabela = HashTable.tabelaHash(227)
+tabela = TabelaDeSimbolosBuscaBinaria.BinarySearchST()
 
 read_from_file("TabelaDeSimbolos/leipzig100k.txt", tabela)
 
