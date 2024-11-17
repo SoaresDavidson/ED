@@ -6,7 +6,7 @@ with open("TabelaDeSimbolos/leipzig100k.txt", "r", encoding="utf-8") as liepzig:
     t1 = time.time()
     for line in arr:
         for word in line.split():
-            tabela.put(word[:3], word)
+            tabela.put(word, 0)
     t2 = time.time() - t1
     print(t2)
 
