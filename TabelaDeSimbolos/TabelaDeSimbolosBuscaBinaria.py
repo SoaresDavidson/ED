@@ -1,4 +1,3 @@
-import string
 import re
 class Item:
     def __init__(self, key, value):
@@ -64,7 +63,7 @@ class BinarySearchST:
             print(f"Erro ao salvar o arquivo: {e}")
 
 
-
-tabela = BinarySearchST()
-tabela.read_from_file("TabelaDeSimbolos/leipzig100k.txt")
-tabela.save_to_file("TabelaDeSimbolos/tabela_salva.txt")
+if __name__ == "__main__":
+    tabela = BinarySearchST()
+    tabela.read_from_file("TabelaDeSimbolos/leipzig100k.txt")
+    tabela.save_to_file("TabelaDeSimbolos/tabela_salva.txt")
