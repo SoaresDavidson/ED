@@ -4,7 +4,7 @@ class Node:
         self.valor = valor
         self.next = None
 
-class Tabela:
+class TabelaEncadeada:
     def __init__(self):
         self.ini = None
         self.valor = 0

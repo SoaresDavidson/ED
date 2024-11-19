@@ -1,46 +1,18 @@
-import HashTable,TabelaDeSimbolosBuscaBinaria,TabelaDeSimbolosEncadeada ,time,re
+import HashTable,TabelaDeSimbolosBuscaBinaria,TabelaDeSimbolosEncadeada
+import menu
+import matplotlib.pyplot as plt
 
-def conta_tempo(func):
-    def wrapper(*args):
-        t1 = time.time()
-        result = func(*args)
-        t2 = time.time() - t1
-        print(t2)
-        return t2
-    return wrapper
+fileName = "TabelaDeSimbolos/leipzig100k.txt"
+tabelas = [HashTable.tabelaHash(227),TabelaDeSimbolosBuscaBinaria.BinarySearchST(),TabelaDeSimbolosEncadeada.TabelaEncadeada()]
+tempos = list()
+nomes = ['Tabela Hash','Tabela com Busca Binaria', 'Tabela Encadeada']
 
-@conta_tempo
-def read_from_file(filename, tabela, value = 0):
-    try:
-        with open(filename, 'r') as file:
-            for line in file:
-                words = line.split()
-                for word in words:
-                    cleaned_word = clean_word(word)
-                    tabela.put(cleaned_word, value) 
-    except FileNotFoundError:
-        print(f"Arquivo '{filename}' não encontrado.")
+for tabela in tabelas:
+    t = tabela
+    tempos.append(menu.calcula_media(fileName,t))
 
+menu.costruir_grafico(nomes,tempos)    
 
-def save_to_file(filename, arr):
-    try:
-        with open(filename, 'w') as file:
-            for item in arr:
-                file.write(f"{item.key}: {item.value}\n")
-        print(f"Tabela salva em '{filename}'.")
-    except Exception as e:
-        print(f"Erro ao salvar o arquivo: {e}")
-
-
-def clean_word(word):
-    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
-
-tabela = HashTable.tabelaHash(227)
-#tabela = TabelaDeSimbolosBuscaBinaria.BinarySearchST()
-#tabela = TabelaDeSimbolosEncadeada.Tabela()
-
-
-read_from_file("TabelaDeSimbolos/leipzig100k.txt", tabela)
 
 
 
