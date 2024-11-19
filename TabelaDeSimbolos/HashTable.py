@@ -36,6 +36,14 @@ class tabelaHash:
             current = current.next
         return None
     
+    def countByCapacity(self):
+        listaSum = [0 for _ in range(self.M)] 
+        for i,v in enumerate(self.table):
+            aux = v
+            while aux is not None:
+                listaSum[i] += 1
+                aux = aux.next
+        return listaSum
                 
 
 
