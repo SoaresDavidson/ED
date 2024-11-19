@@ -11,7 +11,7 @@ for tabela in tabelas:
     t = tabela
     tempos.append(menu.calcula_media(fileName,t))
 
-menu.costruir_grafico(nomes,tempos)    
+menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Tabelas de Símbolos')    
 
 
 
