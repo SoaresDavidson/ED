@@ -36,10 +36,23 @@ class tabelaHash:
             current = current.next
         return None
 
+    def countByCapacity(self):
+        listaSum = [0 for _ in range(self.M)] 
+        for i,v in enumerate(self.table):
+            aux = v
+            while aux is not None:
+                listaSum[i] += 1
+                aux = aux.next
+        return listaSum
+                
+
+
+
+
 
 if __name__ == "__main__":
     print(hash("pinto"))
-    tabela = tabelaHash(227)
+    tabela = tabelaHash(5)
     tabela.put("p","g")
     #print(tabela.search("p").value)
     tabela.put("p","g1")
@@ -47,4 +60,5 @@ if __name__ == "__main__":
     for i in tabela.table:
         if i == None:continue
         print(i.key)
+    print(tabela.countByCapacity())
 
