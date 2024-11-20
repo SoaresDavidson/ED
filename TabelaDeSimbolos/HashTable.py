@@ -58,10 +58,6 @@ class tabelaHash:
         return listaSum
                 
 
-
-
-
-
 if __name__ == "__main__":
     print(hash("pinto"))
     tabela = tabelaHash(5)
@@ -72,5 +68,6 @@ if __name__ == "__main__":
     for i in tabela.table:
         if i == None:continue
         print(i.key)
+    print(tabela.countByCapacity())
     print(tabela)
 
