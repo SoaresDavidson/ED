@@ -4,12 +4,24 @@ class Hash:
         self.value = value
         self.next = None
     
+    def __repr__(self):
+        return f'({self.key}: {self.value})'
+
 class tabelaHash:
     def __init__(self, M):
         self.M = M
         self.n = 0
         self.table = [None] * M
 
+
+    def __str__(self):
+        msg = ''
+        for pos in self.table:
+            n = pos
+            while n is not None:
+                msg += (f'({n.key} : {n.value})' + '\n')
+                n = n.next
+        return f'Tabela Hash: ' + '\n' + msg
 
     def _hash(self, key): 
         return hash(key) % self.M 
@@ -57,3 +69,5 @@ if __name__ == "__main__":
         if i == None:continue
         print(i.key)
     print(tabela.countByCapacity())
+    print(tabela)
+

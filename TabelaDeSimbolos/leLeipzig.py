@@ -11,6 +11,7 @@ nomes = ['Tabela Hash','Tabela com Busca Binaria', 'Tabela Encadeada']
 for i,tabela in enumerate(tabelas):
     tempos.append(menu.calcula_media(fileName,tabela, parametros[i]))
 
-menu.costruir_grafico(nomes, tempos,Xlabel='Tabelas', Ylabel='Tempos (s)', title='Tabelas de Símbolos')    
+#menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Tabelas de Símbolos')    
+
 
 

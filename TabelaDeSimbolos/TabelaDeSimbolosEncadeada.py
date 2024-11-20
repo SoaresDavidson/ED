@@ -3,12 +3,22 @@ class Node:
         self.chave = chave
         self.valor = valor
         self.next = None
+    def __repr__(self):
+        return f'({self.chave}: {self.valor})'
 
 class TabelaEncadeada:
     def __init__(self):
         self.ini = None
         self.valor = 0
     
+    def __str__(self):
+        n = self.ini
+        msg = ''
+        while n is not None:
+            msg += (f'({n.chave} : {n.valor})' + '\n')
+            n = n.next
+        return f'Tabela Encadeada: ' + '\n' + msg
+
     def put(self, chave, value = 0):
         if self.ini is None: 
             self.ini = Node(chave, value)
@@ -24,7 +34,7 @@ class TabelaEncadeada:
             n.next = Node(chave, self.valor)
             self.valor += 1
             return True
-    
+    '''
     def __str__(self):
         res = ""
         n = self.ini
@@ -33,3 +43,4 @@ class TabelaEncadeada:
             if n.next is not None: res += '; '
             n = n.next
         return res
+'''

@@ -1,4 +1,5 @@
 import re
+import menu
 class Item:
     def __init__(self, key, value):
         self.key = key
@@ -12,8 +13,11 @@ class BinarySearchST:
     def __init__(self):
         self.arr = []
 
-    def __repr__(self):
-        return f"BinarySearchST({self.arr})"
+    def __str__(self):
+        msg = ''
+        for element in self.arr:
+            msg += f'({element.key} : {element.value})' + '\n'
+        return f'tabelaBuscaBinaria: ' + '\n' + msg    
 
     def put(self, k, value=0):
         index = self.find(k,self.arr)
@@ -37,17 +41,9 @@ class BinarySearchST:
     def clean_word(self, word):
         return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-    def save_to_file(self, filename):
-        try:
-            with open(filename, 'w') as file:
-                for item in self.arr:
-                    file.write(f"{item.key}: {item.value}\n")
-            print(f"Tabela salva em '{filename}'.")
-        except Exception as e:
-            print(f"Erro ao salvar o arquivo: {e}")
 
 
 if __name__ == "__main__":
     tabela = BinarySearchST()
-    tabela.read_from_file("TabelaDeSimbolos/leipzig100k.txt")
+    menu.read_from_file("TabelaDeSimbolos/leipzig100k.txt",tabela)
     tabela.save_to_file("TabelaDeSimbolos/tabela_salva.txt")
