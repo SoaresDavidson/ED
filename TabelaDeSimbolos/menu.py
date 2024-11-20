@@ -18,7 +18,8 @@ def read_from_file(filename:str, tabela, value: int = 0):
                 words = line.split()
                 for word in words:
                     cleaned_word = clean_word(word)
-                    tabela.put(cleaned_word, value) 
+                    if clean_word != '':
+                        tabela.put(cleaned_word, value) 
         save_to_file(tabela.__class__.__name__,tabela)            
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
@@ -30,6 +31,9 @@ def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salv
     try:
         os.makedirs(directory, exist_ok=True) 
         file_path = os.path.join(directory, filename)
+        if os.path.exists(file_path):
+            print(f"O arquivo '{file_path}' já existe. Salvamento ignorado.")
+            return
         with open(file_path, 'w') as file:
             file.write(tabela.__str__() +'.txt')
         print(f"Tabela salva em '{filename}'.")
