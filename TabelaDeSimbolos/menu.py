@@ -6,14 +6,14 @@ def conta_tempo(func):
         t1 = time.time()
         result = func(*args)
         t2 = time.time() - t1
-        print(t2)
+        #print(t2)
         return t2
     return wrapper
 #
 @conta_tempo
-def read_from_file(filename:str, tabela, value: int = 0):
+def read_from_file(filename:str, tabela:object, value: int = 0):
     try:
-        with open(filename, 'r') as file:
+        with open(filename, 'r',encoding="utf-8") as file:
             for line in file:
                 words = line.split()
                 for word in words:
@@ -22,9 +22,6 @@ def read_from_file(filename:str, tabela, value: int = 0):
         #save_to_file(tabela.__class__.__name__,tabela.arr)            
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
-
-def realiza_operacao(arquivo:str, tabela) -> float:
-    return read_from_file(arquivo,tabela)
 '''
 def save_to_file(filename: str, arr,directory="TabelaDeSimbolos/arquivos_salvos"):
     try:
@@ -38,15 +35,15 @@ def save_to_file(filename: str, arr,directory="TabelaDeSimbolos/arquivos_salvos"
         print(f"Erro ao salvar o arquivo: {e}")
         '''
 
-
-def clean_word(word):
-    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
-
-def calcula_media(arquivo:str,tabela, quant:int = 5):
+def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 10):
     sum = 0
     for i in range(quant):
-        sum += realiza_operacao(arquivo, tabela)
+        t = tabela(*args)
+        sum += read_from_file(arquivo, t)
     return sum/quant
+
+def clean_word(word:str) -> str:
+    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
 def costruir_grafico(x, y, Xlabel:str,Ylabel:str,title:str,Bar:bool=True, save_path="grafico_tabelas.png",directory="TabelaDeSimbolos/arquivos_salvos"):
     
