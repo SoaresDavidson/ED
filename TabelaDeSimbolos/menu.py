@@ -19,30 +19,28 @@ def read_from_file(filename:str, tabela, value: int = 0):
                 for word in words:
                     cleaned_word = clean_word(word)
                     tabela.put(cleaned_word, value) 
-        #save_to_file(tabela.__class__.__name__,tabela.arr)            
+        save_to_file(tabela.__class__.__name__,tabela)            
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
 
 def realiza_operacao(arquivo:str, tabela) -> float:
     return read_from_file(arquivo,tabela)
-'''
-def save_to_file(filename: str, arr,directory="TabelaDeSimbolos/arquivos_salvos"):
+
+def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salvos"):
     try:
         os.makedirs(directory, exist_ok=True) 
         file_path = os.path.join(directory, filename)
         with open(file_path, 'w') as file:
-            for item in arr:
-                file.write(f"{item.key}: {item.value}\n")
+            file.write(tabela.__str__() +'.txt')
         print(f"Tabela salva em '{filename}'.")
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
-        '''
 
 
 def clean_word(word):
     return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-def calcula_media(arquivo:str,tabela, quant:int = 5):
+def calcula_media(arquivo:str,tabela, quant:int = 1):
     sum = 0
     for i in range(quant):
         sum += realiza_operacao(arquivo, tabela)
