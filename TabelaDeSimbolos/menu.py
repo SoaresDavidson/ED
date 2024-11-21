@@ -23,8 +23,8 @@ def read_from_file(filename:str, tabela:object, value: int = 0):
         save_to_file(tabela.__class__.__name__,tabela)            
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
-'''
-def save_to_file(filename: str, arr,directory="TabelaDeSimbolos/arquivos_salvos"):
+
+def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salvos"):
 
     try:
         os.makedirs(directory, exist_ok=True) 
@@ -42,7 +42,7 @@ def save_to_file(filename: str, arr,directory="TabelaDeSimbolos/arquivos_salvos"
 def clean_word(word):
     return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-def calcula_media(arquivo:str,tabela, quant:int = 1):
+def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 1):
     sum = 0
     for i in range(quant):
         t = tabela(*args)
