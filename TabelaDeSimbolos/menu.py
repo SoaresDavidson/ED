@@ -1,4 +1,4 @@
-import time,re,random,os
+import time,re,random,os,json
 import matplotlib.pyplot as plt
 
 def conta_tempo(func):
@@ -20,7 +20,7 @@ def read_from_file(filename:str, tabela:object, value: int = 0):
                     cleaned_word = clean_word(word)
                     if clean_word != '':
                         tabela.put(cleaned_word, value) 
-        save_to_file(tabela.__class__.__name__,tabela)            
+        save_to_file(tabela.__class__.__name__+'.txt',tabela)        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
 
@@ -33,8 +33,27 @@ def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salv
             print(f"O arquivo '{file_path}' já existe. Salvamento ignorado.")
             return
         with open(file_path, 'w') as file:
-            file.write(tabela.__str__() +'.txt')
+            file.write(tabela.__str__())
         print(f"Tabela salva em '{filename}'.")
+    except Exception as e:
+        print(f"Erro ao salvar o arquivo: {e}")
+
+import os
+import json
+
+def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arquivos_salvos"):
+    try:
+        os.makedirs(directory, exist_ok=True)
+        file_path = os.path.join(directory, filename)
+        if os.path.exists(file_path):
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+        else:
+            data = {}
+        data[tipo] = tempos 
+        with open(file_path, 'w') as file:
+            json.dump(data, file, indent=4)
+        print(f"Tabela salva em '{filename}' no formato JSON.")
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
 
@@ -42,11 +61,16 @@ def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salv
 def clean_word(word):
     return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
 
-def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 1):
+def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 5):
     sum = 0
+    tempos = list()
     for i in range(quant):
         t = tabela(*args)
-        sum += read_from_file(arquivo, t)
+        tempo = read_from_file(arquivo, t)
+        sum += tempo
+        tempos.append(tempo)
+    save_times('Tempos.json',tabela.__name__+'.json',tempos)    
+
     return sum/quant
 
 def clean_word(word:str) -> str:
