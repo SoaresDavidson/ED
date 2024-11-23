@@ -106,7 +106,7 @@ def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = Tru
             )    
         plt.axhline(y=media, color='red', linestyle='-', label=f'Média: {media:.2f}', linewidth=0.8)
         plt.legend()
-        plt.xticks([0, x[-1]], fontsize=10)
+        #plt.xticks([0, x[-1]], fontsize=10)
         
    
     plt.tight_layout() 
