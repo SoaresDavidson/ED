@@ -9,7 +9,7 @@ def conta_tempo(func):
         #print(t2)
         return t2
     return wrapper
-#
+
 @conta_tempo
 def read_from_file(filename:str, tabela:object, value: int = 0):
     try:
@@ -41,7 +41,7 @@ def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salv
 import os
 import json
 
-def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arquivos_salvos"):
+def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arquivos_salvos") -> None:
     try:
         os.makedirs(directory, exist_ok=True)
         file_path = os.path.join(directory, filename)
@@ -57,11 +57,7 @@ def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arqui
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
 
-
-def clean_word(word):
-    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
-
-def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 5):
+def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 5) -> int:
     sum = 0
     tempos = list()
     for i in range(quant):
@@ -97,9 +93,10 @@ def costruir_grafico(x, y, Xlabel:str,Ylabel:str,title:str,Bar:bool=True, save_p
             )
         plt.legend(bars, x, title="Tabelas", bbox_to_anchor=(1.05, 1), loc='upper left')
     else:
-        media = sum(y)/len(y)
+        media = sum(y)/len(x)
         plt.bar(x, y, color="skyblue")
         plt.axhline(y=media, color='red', linestyle='-', label=f'Média: {media:.2f}', linewidth=0.8)
+        plt.legend()
         plt.xticks([0, x[-1]], fontsize=10)
         
     plt.tight_layout() 

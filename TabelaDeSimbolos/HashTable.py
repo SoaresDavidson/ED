@@ -8,10 +8,12 @@ class Hash:
         return f'({self.key}: {self.value})'
 
 class tabelaHash:
-    def __init__(self, M):
+    def __init__(self, M:int, hashing:bool = True):
         self.M = M
         self.n = 0
         self.table = [None] * M
+
+        self.hashing = hashing
 
 
     def __str__(self):
@@ -24,10 +26,12 @@ class tabelaHash:
         return f'Tabela Hash: ' + '\n' + msg
 
     def _hash(self, key): 
-        return hash(key) % self.M 
+        if self.hashing:
+            return hash(key) % self.M 
+        else:
+            return ord(key[0]) % self.M
 
-
-    def put(self, key, value):
+    def put(self, key, value = 0):
         listKey = self._hash(key)
         repeatedHash = self.search(key)
 
@@ -38,7 +42,8 @@ class tabelaHash:
         newHash = Hash(key, value)
         newHash.next = self.table[listKey]
         self.table[listKey] = newHash
-
+        self.n += 1
+        
     def search(self, key):
         listKey = self._hash(key)
 
