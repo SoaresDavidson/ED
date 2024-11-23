@@ -16,7 +16,7 @@ def question1():
 
     x = np.array(lista_hashes)
     y = np.array(lista_colisoes)
-    menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e primeira letra como chave",save_path="questão-1")
+    menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e primeira letra como chave",Bar=False,save_path="questão-1")
     #plt.bar(x, y)
     #plt.xlabel("Hash")
     #plt.ylabel("Colisões")
@@ -36,7 +36,7 @@ def question2():
 
     x = np.array(lista_hashes)
     y = np.array(lista_colisoes)
-    menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",save_path="questão-2")
+    menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",Bar=False,save_path="questão-2")
     #plt.bar(x, y)
     #plt.xlabel("Hash")
     #plt.ylabel("Colisões")
@@ -56,7 +56,7 @@ def question3():
 
         x = np.array(lista_hashes)
         y = np.array(lista_colisoes)
-        menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",save_path=f"questão-3-{i}")
+        menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",Bar=False,save_path=f"questão-3-{i}")
         #plt.bar(x, y)
         #plt.xlabel("Hash")
         #plt.ylabel("Colisões")
@@ -77,7 +77,7 @@ def question4():
 
         x = np.array(lista_hashes)
         y = np.array(lista_colisoes)
-        menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",save_path=f"questão-4-{i}")
+        menu.costruir_grafico(x, y, "Hashes", "Colisões", f"Histograma com M = {i} e com Hash Padrão",Bar=False,save_path=f"questão-4-{i}")
         #plt.bar(x, y)
         #plt.xlabel("Hash")
         #plt.ylabel("Colisões")
