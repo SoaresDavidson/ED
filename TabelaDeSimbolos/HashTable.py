@@ -29,7 +29,7 @@ class tabelaHash:
         if self.hashing:
             return hash(key) % self.M 
         else:
-            return ord(key[0]) % self.M
+            return (ord(key[0])-65) % self.M
 
     def put(self, key, value = 0):
         listKey = self._hash(key)
