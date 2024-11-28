@@ -4,41 +4,41 @@ class Hash:
         self.value = value
         self.next = None
     
-    def __repr__(self):
-        return f'({self.key}: {self.value})'
+    # def __repr__(self):
+    #     return f'({self.key}: {self.value})'
 
 class tabelaHash:
-    def __init__(self, M:int, hashing:bool = True):
+    def __init__(self, M:int):
         self.M = M
         self.n = 0
         self.table = [None] * M
 
-        self.hashing = hashing
 
-
-    def __str__(self):
-        msg = ''
-        for pos in self.table:
-            n = pos
-            while n is not None:
-                msg += (f'({n.key} : {n.value})' + '\n')
-                n = n.next
-        return f'Tabela Hash: ' + '\n' + msg
+    # def __str__(self):
+    #     msg = ''
+    #     for pos in self.table:
+    #         n = pos
+    #         while n is not None:
+    #             msg += (f'({n.key} : {n.value})' + '\n')
+    #             n = n.next
+    #     return f'Tabela Hash: ' + '\n' + msg
 
     def _hash(self, key): 
-        if self.hashing:
-            return hash(key) % self.M 
-        else:
-            return (ord(key[0])-65) % self.M
+        return hash(key) % self.M 
+
 
     def put(self, key, value = 0):
         listKey = self._hash(key)
-        repeatedHash = self.search(key)
+        current = self.table[listKey]
 
-        if repeatedHash is not None:
-            repeatedHash.value = value
-            return
-        
+        # Traverse the linked list to check for duplicates
+        while current is not None:
+            if current.key == key:
+                current.value = value  # Update value if key exists
+                return
+            current = current.next
+
+        # If key is not found, create a new node and add it to the bucket
         newHash = Hash(key, value)
         newHash.next = self.table[listKey]
         self.table[listKey] = newHash
