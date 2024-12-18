@@ -11,18 +11,24 @@ def conta_tempo(func):
     return wrapper
 
 @conta_tempo
-def read_from_file(filename:str, tabela:object, value: int = 0):
+def read_from_file(filename:str,tabela:list, value: int = 0):
     try:
         with open(filename, 'r',encoding="utf-8") as file:
             for line in file:
                 words = line.split()
                 for word in words:
-                    cleaned_word = clean_word(word)
-                    if clean_word != '':
-                        tabela.put(cleaned_word, value) 
-        save_to_file(tabela.__class__.__name__+'.txt',tabela)        
+                    addHash(tabela, word, value) 
+        #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
+
+def _hash(key, capacity): 
+        return hash(key) % capacity
+
+def addHash(tabela:list, key, value):
+    listKey = _hash(key, len(tabela))
+    if key in tabela[listKey].keys(): return
+    tabela[listKey][key] = value
 
 def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salvos"):
 
@@ -41,7 +47,7 @@ def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salv
 import os
 import json
 
-def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arquivos_salvos") -> None:
+def save_times(filename: str,tipo:str, tempos, directory="TrabalhoFinal/arquivos_salvos") -> None:
     try:
         os.makedirs(directory, exist_ok=True)
         file_path = os.path.join(directory, filename)
@@ -57,15 +63,15 @@ def save_times(filename: str,tipo:str, tempos, directory="TabelaDeSimbolos/arqui
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
 
-def calcula_media(arquivo:str,tabela, args:list = [], quant:int = 5) -> int:
+def calcula_media(arquivo:str,tabela:list, quant:int = 5) -> int:
     sum = 0
     tempos = list()
     for i in range(quant):
-        t = tabela(*args)
-        tempo = read_from_file(arquivo, t)
+        new_tabela = tabela
+        tempo = read_from_file(arquivo, new_tabela)
         sum += tempo
         tempos.append(tempo)
-    save_times('Tempos.json',tabela.__name__+'.json',tempos)    
+    #save_times('Tempos.json',tabela.__name__+'.json',tempos)    
 
     return sum/quant
 
