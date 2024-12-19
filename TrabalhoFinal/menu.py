@@ -1,23 +1,46 @@
-import time,re,random,os,json
+import time,re,random,os,json,collections
 import matplotlib.pyplot as plt
 
 def conta_tempo(func):
-    def wrapper(*args):
+    def wrapper(*args, **kwargs):
         t1 = time.time()
-        result = func(*args)
+        result = func(*args,**kwargs)
         t2 = time.time() - t1
         #print(t2)
         return t2
     return wrapper
 
 @conta_tempo
-def read_from_file(filename:str,tabela:list, value: int = 0):
+def read_from_file_tables(filename:str,tabela:list, value: int = 0) -> None:
     try:
         with open(filename, 'r',encoding="utf-8") as file:
             for line in file:
                 words = line.split()
                 for word in words:
                     addHash(tabela, word, value) 
+        #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
+    except FileNotFoundError:
+        print(f"Arquivo '{filename}' não encontrado.")
+        
+@conta_tempo 
+def read_from_file_counter(filename:str, counter) -> None:
+    try:
+        with open(filename, 'r',encoding="utf-8") as file:
+            text = file.read()
+            words = text.split()
+            counter.update(words)
+        #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
+    except FileNotFoundError:
+        print(f"Arquivo '{filename}' não encontrado.")
+
+@conta_tempo 
+def read_from_file_dict(filename:str, tabela:dict, value:int = 0) -> None:
+    try:
+        with open(filename, 'r',encoding="utf-8") as file:
+            text = file.read()
+            words = text.split()
+            for word in words:
+                tabela[word] = value
         #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
@@ -63,12 +86,12 @@ def save_times(filename: str,tipo:str, tempos, directory="TrabalhoFinal/arquivos
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
 
-def calcula_media(arquivo:str,tabela:list, quant:int = 5) -> int:
+def calcula_media_tables(arquivo:str,tabela:list, quant:int = 5) -> int:
     sum = 0
     tempos = list()
     for i in range(quant):
         new_tabela = tabela
-        tempo = read_from_file(arquivo, new_tabela)
+        tempo = read_from_file_tables(arquivo, new_tabela)
         sum += tempo
         tempos.append(tempo)
     #save_times('Tempos.json',tabela.__name__+'.json',tempos)    
