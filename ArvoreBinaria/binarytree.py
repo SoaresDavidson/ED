@@ -54,7 +54,14 @@ class Node:
         self.key = val
         self.left = None
         self.right = None
-    
+    def height(self):
+        # Se o nó não tiver filhos, a altura é 1 (somente o próprio nó)
+        if not self:
+            return 0
+        left_height = self.left.height() if self.left else 0
+        right_height = self.right.height() if self.right else 0
+        return 1 + max(left_height, right_height)
+
     def fb(self):
         return -height(self.left) + height(self.right)    
 
@@ -90,7 +97,11 @@ class BinaryTree:
         if val > self.greatest: self.greatest = val
 
     def heightT(self):
-        return self.root.height()
+        if self.root is not None:
+             return self.root.height()
+        else:
+            return 0  # Ou algum valor que represente uma árvore vazia
+
 
     def internalPathLength(self):
         return caminho(self.root, 0)
@@ -125,9 +136,9 @@ class BinaryTree:
 
         return res
 
-tree = BinaryTree()
+'''tree = BinaryTree()
 tree.insert(4)
 tree.insert(3)
 tree.insert(2)
 tree.insert(1)
-print(tree.emOrdem(), tree.smallest, tree.greatest, tree.levelOrder(), tree.internalPathLength(), isAVL(tree.root))
+print(tree.emOrdem(), tree.smallest, tree.greatest, tree.levelOrder(), tree.internalPathLength(), isAVL(tree.root))'''
