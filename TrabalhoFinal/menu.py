@@ -7,7 +7,7 @@ def conta_tempo(func):
         result = func(*args,**kwargs)
         t2 = time.time() - t1
         #print(t2)
-        return t2
+        return [t2,result]
     return wrapper
 
 @conta_tempo
@@ -17,7 +17,8 @@ def read_from_file_tables(filename:str,tabela:list, value: int = 0) -> None:
             for line in file:
                 words = line.split()
                 for word in words:
-                    addHash(tabela, word, value) 
+                    addHash(tabela, word, value)
+        return tabela 
         #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
@@ -29,7 +30,8 @@ def read_from_file_counter(filename:str, counter) -> None:
             text = file.read()
             words = text.split()
             counter.update(words)
-        #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
+        #save_to_file(tabela.__class__.__name__+'.txt',tabela)
+        return counter        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
 
@@ -41,7 +43,8 @@ def read_from_file_dict(filename:str, tabela:dict, value:int = 0) -> None:
             words = text.split()
             for word in words:
                 tabela[word] = value
-        #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
+        #save_to_file(tabela.__class__.__name__+'.txt',tabela) 
+        return tabela        
     except FileNotFoundError:
         print(f"Arquivo '{filename}' não encontrado.")
 
@@ -86,20 +89,64 @@ def save_times(filename: str,tipo:str, tempos, directory="TrabalhoFinal/arquivos
     except Exception as e:
         print(f"Erro ao salvar o arquivo: {e}")
 
+
 def calcula_media_tables(arquivo:str,tabela:list, quant:int = 5) -> int:
     sum = 0
-    tempos = list()
     for i in range(quant):
         new_tabela = tabela
         tempo = read_from_file_tables(arquivo, new_tabela)
-        sum += tempo
-        tempos.append(tempo)
+        sum += tempo[0]
     #save_times('Tempos.json',tabela.__name__+'.json',tempos)    
-
     return sum/quant
 
-def clean_word(word:str) -> str:
-    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
+def calcula_media_counter(arquivo:str,tabela:collections.Counter , quant:int = 5) -> int:
+    sum = 0
+    for i in range(quant):
+        new_tabela = tabela
+        tempo = read_from_file_counter(arquivo, new_tabela)
+        sum += tempo[0]
+    #save_times('Tempos.json',tabela.__name__+'.json',tempos)    
+    return sum/quant
+
+def calcula_media_dict(arquivo:str,tabela, quant:int = 5) -> int:
+    sum = 0
+    for i in range(quant):
+        new_tabela = tabela
+        tempo = read_from_file_dict(arquivo, new_tabela)
+        sum += tempo[0]
+    #save_times('Tempos.json',tabela.__name__+'.json',tempos)    
+    return sum/quant
+
+@conta_tempo
+def busca_lista_dict(tabela:list,key):
+    hashKey = _hash(key, len(tabela))
+    try:
+        return tabela[hashKey][key]
+    except:
+        return None
+    
+@conta_tempo
+def busca_dict(tabela:list,key):
+    try:
+        return tabela[key]
+    except:
+        return None
+    
+@conta_tempo
+def delete_lista_dict(tabela:list, key):
+    hashKey = _hash(key, len(tabela))
+    try:
+        return tabela[hashKey].pop(key)
+    except:
+        return None
+    
+@conta_tempo
+def delete_dict(tabela:list,key):
+    try:
+        return tabela.pop(key)
+    except:
+        return None
+
 
 def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = True, save_path: str = "grafico_tabelas.png", directory: str = "TabelaDeSimbolos/arquivos_salvos"):
     
