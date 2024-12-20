@@ -8,20 +8,23 @@ def uso_lista_dict():
     capacity = 271
     tabela = [{} for _ in range(capacity)]
     tempos.append(menu.calcula_media_tables(arquivo = fileName,tabela = tabela))
-    print(tempos)
+    #print(tempos)
+    return tabela
 
 def uso_Counter():
     counter = collections.Counter()
-    tempos.append(menu.read_from_file_counter(filename = fileName, counter = counter))
-
-    print(counter)
+    tempos.append(menu.calcula_media_counter(arquivo = fileName, tabela = counter))
+    #print(counter)
+    return counter
 
 def uso_dict():
     tabela = {}
-    tempos.append(menu.read_from_file_dict(filename = fileName, tabela = tabela))
-    print(tabela)
+    tempos.append(menu.calcula_media_dict(arquivo = fileName, tabela = tabela))
+    #print(tabela)
+    return tabela
 
 uso_lista_dict()
 uso_Counter()
 uso_dict()
 print(tempos)
+
