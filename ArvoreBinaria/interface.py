@@ -23,8 +23,6 @@ def draw_tree(canvas, tree, node, x, y, offset_x, offset_y):
             draw_tree(canvas, tree, node.right, x + offset_x, y + offset_y, offset_x // 1.25, offset_y)
 
 
-
-
 def main():
     def inserir_valor():
         try:
@@ -97,9 +95,15 @@ def main():
     canvas.config(yscrollcommand=scrollbar.set)
     
     canvas.config(scrollregion=canvas.bbox("all"))
+    def scroll_canvas(event):
+        if event.delta > 0: 
+            canvas.yview_scroll(-1, "units")
+        else:  
+            canvas.yview_scroll(1, "units")
 
+    root.bind("<MouseWheel>", scroll_canvas)
+    canvas.config(scrollregion=canvas.bbox("all"))
     atualizar_canvas()
-
     label_instrucoes = tk.Label(frame_entrada, text="Digite um número e clique em 'Inserir' para adicionar à árvore.", bg='lightblue', font=('Arial', 10))
     label_instrucoes.grid(row=1, column=1, padx=5)
 
