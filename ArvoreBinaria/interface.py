@@ -41,6 +41,25 @@ def main():
             messagebox.showinfo("Árvore Balanceada", "A árvore está balanceada!")
         else:
             messagebox.showwarning("Árvore Não Balanceada", "A árvore não está balanceada!")
+    def mostrar_informacoes():
+        #
+        altura = tree.heightT()
+        menor = tree.min()
+        maior = tree.max()
+        comprimento_interno = tree.internalPathLength()
+        tamanho = tree.sizes()
+        info = f"Tamanho: {tamanho}\nAltura: {altura}\nMenor elemento: {menor}\nMaior elemento: {maior}\nComprimento Interno: {comprimento_interno}"
+        messagebox.showinfo("Informações da Árvore", info)
+
+    def mostrar_percursos():
+        percursos = (
+            f"Em Ordem: {tree.emOrdem()}",
+            f"Pós Ordem: {tree.posOrdem()}",
+            f"Pré Ordem: {tree.preOrdem()}",
+            f"Busca em Largura: {tree.levelOrder()}"
+        )
+        messagebox.showinfo("Percursos da Árvore", "\n".join(percursos))
+        
 
     def atualizar_canvas():
         canvas.delete("all")
@@ -81,7 +100,11 @@ def main():
 
     btn_verificar_balanceamento = tk.Button(root, text="Verificar Balanceamento", command=verificar_balanceamento, bg='lightyellow', font=('Arial', 12))
     btn_verificar_balanceamento.pack(pady=10)
+    btn_mostrar_info = tk.Button(root, text="Mostrar Informações", command=mostrar_informacoes, bg='lightyellow', font=('Arial', 12))
+    btn_mostrar_info.pack(pady=10)
 
+    btn_mostrar_percursos = tk.Button(root, text="Mostrar Percursos", command=mostrar_percursos, bg='lightyellow', font=('Arial', 12))
+    btn_mostrar_percursos.pack(pady=10)
     frame_canvas = tk.Frame(root)
     frame_canvas.pack(pady=10)
 

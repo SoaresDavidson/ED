@@ -55,7 +55,7 @@ class Node:
         self.left = None
         self.right = None
     def height(self):
-        # Se o nó não tiver filhos, a altura é 1 (somente o próprio nó)
+       
         if not self:
             return 0
         left_height = self.left.height() if self.left else 0
@@ -100,8 +100,33 @@ class BinaryTree:
         if self.root is not None:
              return self.root.height()
         else:
-            return 0  # Ou algum valor que represente uma árvore vazia
+            return 0
+    
+    def sizes(self):
+        return self._size(self.root)
 
+    def _size(self, node):
+        if node is None:
+            return 0
+        return 1 + self._size(node.left) + self._size(node.right)
+
+    def min(self):
+        return self._min(self.root)
+
+    def _min(self, node):
+        current = node
+        while current.left is not None:
+            current = current.left
+        return current.key
+                 
+    def max(self):
+        return self._max(self.root)
+
+    def _max(self, node):
+        current = node
+        while current.right is not None:
+            current = current.right
+        return current.key
 
     def internalPathLength(self):
         return caminho(self.root, 0)
