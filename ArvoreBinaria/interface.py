@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import binarytree
 from tkinter import messagebox
 
@@ -23,7 +24,32 @@ def draw_tree(canvas, tree, node, x, y, offset_x, offset_y):
             draw_tree(canvas, tree, node.right, x + offset_x, y + offset_y, offset_x // 1.25, offset_y)
 
 
+
 def main():
+    def mostrar_messagebox_personalizada(titulo, mensagem,cor):
+        messagebox_personalizada = tk.Toplevel(root)
+        messagebox_personalizada.title(titulo)
+        messagebox_personalizada.geometry("400x200")
+        messagebox_personalizada.configure(bg=cor)
+        screen_width = root.winfo_screenwidth()
+        screen_height = root.winfo_screenheight()
+        position_top = 50
+        position_right = 70
+        messagebox_personalizada.geometry(f"400x200+{position_right}+{position_top}")
+
+        label = ttk.Label(messagebox_personalizada, text=mensagem, font=("Arial", 12), background=cor, justify="left")
+        label.pack(pady=20)
+        btn_ok = ttk.Button(messagebox_personalizada, text="OK", command=messagebox_personalizada.destroy, style="TButton")
+        btn_ok.pack(pady=5)
+        style = ttk.Style()
+        style.configure("TButton",
+                        padding=6,
+                        relief="flat",
+                        background="lightgreen",
+                        font=("Arial", 10),
+                        width=10)
+        messagebox_personalizada.transient(root)
+        messagebox_personalizada.grab_set()
     def inserir_valor():
         try:
             valor = int(entry_valor.get())
@@ -42,23 +68,28 @@ def main():
         else:
             messagebox.showwarning("Árvore Não Balanceada", "A árvore não está balanceada!")
     def mostrar_informacoes():
-        #
-        altura = tree.heightT()
-        menor = tree.min()
-        maior = tree.max()
-        comprimento_interno = tree.internalPathLength()
-        tamanho = tree.sizes()
-        info = f"Tamanho: {tamanho}\nAltura: {altura}\nMenor elemento: {menor}\nMaior elemento: {maior}\nComprimento Interno: {comprimento_interno}"
-        messagebox.showinfo("Informações da Árvore", info)
+        try:
+            altura = tree.heightT()
+            menor = tree.min()
+            maior = tree.max()
+            comprimento_interno = tree.internalPathLength()
+            tamanho = tree.sizes()
+            info = f"Tamanho: {tamanho}\nAltura: {altura}\nMenor elemento: {menor}\nMaior elemento: {maior}\nComprimento Interno: {comprimento_interno}"
+            mostrar_messagebox_personalizada("Informações da Árvore", info,'lightblue')
+        except Exception as e:
+            mostrar_messagebox_personalizada("Erro", "A árvore está vazia!",'lightcoral')
 
     def mostrar_percursos():
-        percursos = (
-            f"Em Ordem: {tree.emOrdem()}",
-            f"Pós Ordem: {tree.posOrdem()}",
-            f"Pré Ordem: {tree.preOrdem()}",
-            f"Busca em Largura: {tree.levelOrder()}"
-        )
-        messagebox.showinfo("Percursos da Árvore", "\n".join(percursos))
+        try:
+            percursos = (
+                f"Em Ordem: {'=>'.join(map(str,tree.emOrdem()))}",
+                f"Pós Ordem: {'=>'.join(map(str,tree.posOrdem()))}",
+                f"Pré Ordem: {'=>'.join(map(str,tree.preOrdem()))}",
+                f"Busca em Largura: {'=>'.join(map(str,tree.levelOrder()))}"
+            )
+            mostrar_messagebox_personalizada("Percursos da Árvore", "\n".join(percursos),'lightblue')
+        except Exception as e:
+            mostrar_messagebox_personalizada("Erro", "A árvore está vazia!",'lightcoral')
         
 
     def atualizar_canvas():
@@ -73,8 +104,10 @@ def main():
     
     root = tk.Tk()
     root.title("Árvore Binária")
-    root.geometry("700x500")
-    root.maxsize
+    largura = root.winfo_screenwidth()
+    altura = root.winfo_screenheight()
+    root.state('zoomed')
+    root.geometry(f"{altura}x{largura}")
     root.configure(bg='lightblue')
     #imagem = tk.PhotoImage(file='C:/Users/kauan/Documents/Code/mytkinter/exemplos/icons/download.png')
 
