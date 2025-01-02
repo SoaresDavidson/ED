@@ -17,6 +17,7 @@ def read_from_file_tables(filename:str,tabela:list, value: int = 0) -> None:
             for line in file:
                 words = line.split()
                 for word in words:
+                    print(word)
                     addHash(tabela, word, value)
         return tabela 
         #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
