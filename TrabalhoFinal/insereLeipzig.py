@@ -2,6 +2,7 @@ import menu,collections
 import matplotlib.pyplot as plt
 
 tempos = list()
+nomes = ["hashTable","Counter","dicionario"]
 fileName = "TrabalhoFinal/leipzig100k.txt"
 
 def uso_lista_dict():
@@ -28,3 +29,4 @@ uso_Counter()
 uso_dict()
 print(tempos)
 
+menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Tabelas de Símbolos')  

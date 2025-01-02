@@ -17,8 +17,8 @@ def read_from_file_tables(filename:str,tabela:list, value: int = 0) -> None:
             for line in file:
                 words = line.split()
                 for word in words:
-                    print(word)
-                    addHash(tabela, word, value)
+                    new_word = clean_word(word)
+                    addHash(tabela, new_word, value)
         return tabela 
         #save_to_file(tabela.__class__.__name__+'.txt',tabela)        
     except FileNotFoundError:
@@ -30,7 +30,7 @@ def read_from_file_counter(filename:str, counter) -> None:
         with open(filename, 'r',encoding="utf-8") as file:
             text = file.read()
             words = text.split()
-            counter.update(words)
+            counter.update(filter(clean_word, words))
         #save_to_file(tabela.__class__.__name__+'.txt',tabela)
         return counter        
     except FileNotFoundError:
@@ -43,7 +43,7 @@ def read_from_file_dict(filename:str, tabela:dict, value:int = 0) -> None:
             text = file.read()
             words = text.split()
             for word in words:
-                tabela[word] = value
+                tabela[clean_word(word)] = value
         #save_to_file(tabela.__class__.__name__+'.txt',tabela) 
         return tabela        
     except FileNotFoundError:
@@ -56,6 +56,11 @@ def addHash(tabela:list, key, value):
     listKey = _hash(key, len(tabela))
     if key in tabela[listKey].keys(): return
     tabela[listKey][key] = value
+
+def clean_word(word:str) -> str:
+    return re.sub(r"(?<![a-zA-Z])'|'(?![a-zA-Z])|(?<![a-zA-Z0-9])[^\w']+|[^\w']+(?![a-zA-Z0-9])", "", word)
+
+filter
 
 def save_to_file(filename: str, tabela,directory="TabelaDeSimbolos/arquivos_salvos"):
 
@@ -149,7 +154,7 @@ def delete_dict(tabela:list,key):
         return None
 
 
-def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = True, save_path: str = "grafico_tabelas.png", directory: str = "TabelaDeSimbolos/arquivos_salvos"):
+def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = True, save_path: str = "grafico_tabelas.png", directory: str = "arquivos_salvos"):
     
     plt.figure(figsize=(10, 6))
     plt.title(title, fontsize=14, fontweight='bold')

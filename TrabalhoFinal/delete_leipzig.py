@@ -2,6 +2,7 @@ import menu,collections
 import matplotlib.pyplot as plt
 
 tempos = list()
+nomes = ["hashTable","Counter","dicionario"]
 fileName = "TrabalhoFinal/leipzig100k.txt"
 
 def uso_lista_dict():
@@ -32,18 +33,20 @@ palavras = ["Lisbon", "NASA",
 "Kyunghee", "Konkuk", "Sogang", "momentarily", "rubella", "vaccinations", "government",
 "Authorities"]
 
+tempos_lista_dict = []
 for i in palavras:
-    x = menu.delete_lista_dict(tabela_lista_dict, i)
-    print(x)
+    tempo = menu.delete_lista_dict(tabela_lista_dict, i)
+    tempos_lista_dict.append(tempo[0] * 10e4)
 
+tempos_counter = []
 for i in palavras:
-    x = menu.delete_dict(tabela_counter, i)
-    print(x)
+    tempo = menu.delete_dict(tabela_counter, i)
+    tempos_counter.append(tempo[0] * 10e4)
 
+tempos_dict = []
 for i in palavras:
-    x = menu.delete_dict(tabela_dict, i)
-    print(x)
-
+    tempo = menu.delete_dict(tabela_dict, i)
+    tempos_dict.append(tempo[0] * 10e4)
 
 for i in palavras:
     x = menu.busca_lista_dict(tabela_lista_dict, i)
@@ -57,3 +60,6 @@ for i in palavras:
     x = menu.busca_dict(tabela_dict, i)
     print(x)
 
+menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 
+menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 
+menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 

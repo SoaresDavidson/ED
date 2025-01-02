@@ -60,7 +60,7 @@ class Node:
             return 0
         left_height = self.left.height() if self.left else 0
         right_height = self.right.height() if self.right else 0
-        return 1 + max(left_height, right_height)
+        return 1+max(left_height, right_height)
 
     def fb(self):
         return -height(self.left) + height(self.right)    

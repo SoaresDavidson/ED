@@ -69,7 +69,7 @@ def main():
             messagebox.showwarning("Árvore Não Balanceada", "A árvore não está balanceada!")
     def mostrar_informacoes():
         try:
-            altura = tree.heightT()
+            altura = tree.heightT()-1
             menor = tree.min()
             maior = tree.max()
             comprimento_interno = tree.internalPathLength()
@@ -104,9 +104,11 @@ def main():
     
     root = tk.Tk()
     root.title("Árvore Binária")
+    root.attributes("-fullscreen", True)
+    root.bind("<Escape>", root.attributes("-fullscreen", True))
     largura = root.winfo_screenwidth()
     altura = root.winfo_screenheight()
-    root.state('zoomed')
+    root.state('iconic')
     root.geometry(f"{altura}x{largura}")
     root.configure(bg='lightblue')
     #imagem = tk.PhotoImage(file='C:/Users/kauan/Documents/Code/mytkinter/exemplos/icons/download.png')
