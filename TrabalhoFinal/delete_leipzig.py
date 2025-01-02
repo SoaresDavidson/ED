@@ -60,6 +60,6 @@ for i in palavras:
     x = menu.busca_dict(tabela_dict, i)
     print(x)
 
-menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 
-menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 
-menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção') 
+menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção hashtable', save_path= "deleteTimesListDict.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção counter', save_path= "deleteTimesCounter.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção  dicionario', save_path= "deleteTimesDict.png",directory= "TrabalhoFinal/tempos") 

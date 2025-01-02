@@ -47,6 +47,6 @@ for i in palavras:
     tempo = menu.busca_dict(tabela_dict, i)
     tempos_dict.append(tempo[0] * 10e4)
 
-menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca') 
-menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca') 
-menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca') 
+menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca hash table', save_path= "searchTimesListDict.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca counter', save_path= "searchTimesCounter.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca dicionario', save_path= "searchTimesDict.png",directory= "TrabalhoFinal/tempos") 

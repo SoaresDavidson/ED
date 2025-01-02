@@ -29,4 +29,4 @@ uso_Counter()
 uso_dict()
 print(tempos)
 
-menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Tabelas de Símbolos')  
+menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Inserção',save_path= "insertTimes.png",directory= "TrabalhoFinal/tempos")  
