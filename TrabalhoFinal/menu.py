@@ -155,7 +155,8 @@ def delete_dict(tabela:list,key):
 
 
 def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = True, save_path: str = "grafico_tabelas.png", directory: str = "arquivos_salvos"):
-    
+    cores = ['#FF6F61','#6B8E23','#4B8E8D','#FFD700','#8A2BE2',
+                '#FF6347','#20B2AA','#F08080', '#48C9B0' ,'#D3D3D3']
     plt.figure(figsize=(10, 6))
     plt.title(title, fontsize=14, fontweight='bold')
     plt.xlabel(Xlabel, fontsize=12)
@@ -164,12 +165,13 @@ def costruir_grafico(x, y, Xlabel: str, Ylabel: str, title: str, Bar: bool = Tru
     plt.yticks(fontsize=10)
     
     if Bar:
-        colors = [f'#{random.randint(0, 0xFFFFFF):06x}' for _ in x]
-        bars = plt.bar(x, y, color=colors) 
+        colors = [cores[i % len(cores)] for i, _ in enumerate(x)]
+        bars = plt.bar(x, y, color=colors)
+        plt.xticks(rotation=45, ha='right') 
         for bar, label in zip(bars, x):
             plt.text(
                 bar.get_x() + bar.get_width() / 2, 
-                bar.get_height() + 0.05,
+                bar.get_height() + 0.01,
                 f'{bar.get_height():.2f}',
                 ha='center',
                 fontsize=9
