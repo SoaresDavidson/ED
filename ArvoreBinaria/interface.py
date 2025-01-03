@@ -104,8 +104,8 @@ def main():
     
     root = tk.Tk()
     root.title("Árvore Binária")
-    root.attributes("-fullscreen", True)
-    root.bind("<Escape>", root.attributes("-fullscreen", True))
+    # root.attributes("-fullscreen", True)
+    # root.bind("<Escape>", root.attributes("-fullscreen", False))
     largura = root.winfo_screenwidth()
     altura = root.winfo_screenheight()
     root.state('iconic')
