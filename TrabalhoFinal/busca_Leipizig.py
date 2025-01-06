@@ -1,5 +1,6 @@
 import menu,collections
 import matplotlib.pyplot as plt
+from decimal import Decimal
 
 tempos = list()
 nomes = ["hashTable","Counter","dicionario"]
@@ -34,19 +35,19 @@ palavras = ["Lisbon", "NASA",
 tempos_lista_dict = []
 for i in palavras:
     tempo = menu.busca_lista_dict(tabela_lista_dict, i)
-    tempos_lista_dict.append(tempo[0] * 10e4)
+    tempos_lista_dict.append(tempo[0] * 1e6)
 
 
 tempos_counter = []
 for i in palavras:
     tempo = menu.busca_dict(tabela_counter, i)
-    tempos_counter.append(tempo[0] * 10e4)
+    tempos_counter.append(tempo[0] * 1e6)
 
 tempos_dict = []
 for i in palavras:
     tempo = menu.busca_dict(tabela_dict, i)
-    tempos_dict.append(tempo[0] * 10e4)
+    tempos_dict.append(tempo[0] * 1e6)
 
-menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca hash table', save_path= "searchTimesListDict.png",directory= "TrabalhoFinal/tempos") 
-menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca counter', save_path= "searchTimesCounter.png",directory= "TrabalhoFinal/tempos") 
-menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Busca dicionario', save_path= "searchTimesDict.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca hash table', save_path= "searchTimesListDict.png",directory= "TrabalhoFinal\\tempos") 
+menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca counter', save_path= "searchTimesCounter.png",directory= "TrabalhoFinal\\tempos") 
+menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Busca dicionario', save_path= "searchTimesDict.png",directory= "TrabalhoFinal\\tempos") 

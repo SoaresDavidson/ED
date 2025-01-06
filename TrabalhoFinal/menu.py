@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 
 def conta_tempo(func):
     def wrapper(*args, **kwargs):
-        t1 = time.time()
+        t1 = time.perf_counter()
         result = func(*args,**kwargs)
-        t2 = time.time() - t1
+        t2 = time.perf_counter() - t1
         #print(t2)
         return [t2,result]
     return wrapper
