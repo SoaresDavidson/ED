@@ -33,20 +33,32 @@ palavras = ["Lisbon", "NASA",
 "Kyunghee", "Konkuk", "Sogang", "momentarily", "rubella", "vaccinations", "government",
 "Authorities"]
 
+media = 5
+
 tempos_lista_dict = []
 for i in palavras:
-    tempo = menu.delete_lista_dict(tabela_lista_dict, i)
-    tempos_lista_dict.append(tempo[0] * 10e4)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.delete_lista_dict(tabela_lista_dict, i)
+        sum += tempo[0]
+    tempos_lista_dict.append((sum/media) * 1e6)
+
 
 tempos_counter = []
 for i in palavras:
-    tempo = menu.delete_dict(tabela_counter, i)
-    tempos_counter.append(tempo[0] * 10e4)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.delete_dict(tabela_counter, i)
+        sum += tempo[0]
+    tempos_counter.append((sum/media) * 1e6)
 
 tempos_dict = []
 for i in palavras:
-    tempo = menu.delete_dict(tabela_dict, i)
-    tempos_dict.append(tempo[0] * 10e4)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.delete_dict(tabela_dict, i)
+        sum += tempo[0]
+    tempos_dict.append((sum/media) * 1e6)
 
 for i in palavras:
     x = menu.busca_lista_dict(tabela_lista_dict, i)
@@ -60,6 +72,6 @@ for i in palavras:
     x = menu.busca_dict(tabela_dict, i)
     print(x)
 
-menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção hashtable', save_path= "deleteTimesListDict.png",directory= "TrabalhoFinal/tempos") 
-menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção counter', save_path= "deleteTimesCounter.png",directory= "TrabalhoFinal/tempos") 
-menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (ms)',title='Tempos de Deleção  dicionario', save_path= "deleteTimesDict.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Deleção hashtable', save_path= "deleteTimesListDict.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Deleção counter', save_path= "deleteTimesCounter.png",directory= "TrabalhoFinal/tempos") 
+menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Deleção  dicionario', save_path= "deleteTimesDict.png",directory= "TrabalhoFinal/tµspos") 

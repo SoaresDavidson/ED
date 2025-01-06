@@ -32,21 +32,33 @@ tabela_dict = uso_dict()
 palavras = ["Lisbon", "NASA",
 "Kyunghee", "Konkuk", "Sogang", "momentarily", "rubella", "vaccinations", "government",
 "Authorities"]
+
+media = 5
+
 tempos_lista_dict = []
 for i in palavras:
-    tempo = menu.busca_lista_dict(tabela_lista_dict, i)
-    tempos_lista_dict.append(tempo[0] * 1e6)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.busca_lista_dict(tabela_lista_dict, i)
+        sum += tempo[0]
+    tempos_lista_dict.append((sum/media) * 1e6)
 
 
 tempos_counter = []
 for i in palavras:
-    tempo = menu.busca_dict(tabela_counter, i)
-    tempos_counter.append(tempo[0] * 1e6)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.busca_dict(tabela_counter, i)
+        sum += tempo[0]
+    tempos_counter.append((sum/media) * 1e6)
 
 tempos_dict = []
 for i in palavras:
-    tempo = menu.busca_dict(tabela_dict, i)
-    tempos_dict.append(tempo[0] * 1e6)
+    sum = 0
+    for _ in range(media):
+        tempo = menu.busca_dict(tabela_dict, i)
+        sum += tempo[0]
+    tempos_dict.append((sum/media) * 1e6)
 
 menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca hash table', save_path= "searchTimesListDict.png",directory= "TrabalhoFinal\\tempos") 
 menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca counter', save_path= "searchTimesCounter.png",directory= "TrabalhoFinal\\tempos") 
