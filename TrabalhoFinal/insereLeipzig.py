@@ -2,12 +2,19 @@ import menu,collections
 import matplotlib.pyplot as plt
 
 tempos = list()
-nomes = ["hashTable","Counter","dicionario"]
+nomes = ["hashTable","hashTableTupla","Counter","dicionario"]
 fileName = "TrabalhoFinal/leipzig100k.txt"
 
 def uso_lista_dict():
     capacity = 271
     tabela = [{} for _ in range(capacity)]
+    tempos.append(menu.calcula_media_tables(arquivo = fileName,tabela = tabela))
+    #print(tempos)
+    return tabela
+
+def uso_tupla_dict():
+    capacity = 271
+    tabela = tuple({} for _ in range(capacity))
     tempos.append(menu.calcula_media_tables(arquivo = fileName,tabela = tabela))
     #print(tempos)
     return tabela
@@ -27,6 +34,7 @@ def uso_dict():
 uso_lista_dict()
 uso_Counter()
 uso_dict()
+uso_tupla_dict()
 print(tempos)
 
 menu.costruir_grafico(nomes,tempos,Xlabel='Tabelas',Ylabel='Tempos (s)',title='Inserção',save_path= "insertTimes.png",directory= "TrabalhoFinal/tempos")  

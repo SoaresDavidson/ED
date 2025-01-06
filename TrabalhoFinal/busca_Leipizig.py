@@ -13,6 +13,13 @@ def uso_lista_dict():
     #print(tempos)
     return result[1]
 
+def uso_tupla_dict():
+    capacity = 271
+    tabela = tuple({} for _ in range(capacity))
+    result = menu.read_from_file_tables(filename = fileName,tabela = tabela)
+    #print(tempos)
+    return result[1]
+
 def uso_Counter():
     counter = collections.Counter()
     result = menu.read_from_file_counter(filename = fileName, counter = counter)
@@ -26,6 +33,7 @@ def uso_dict():
     return result[1]
 
 tabela_lista_dict = uso_lista_dict()
+tabela_tupla_dict = uso_tupla_dict()
 tabela_counter = uso_Counter()
 tabela_dict = uso_dict()
 
@@ -42,6 +50,14 @@ for i in palavras:
         tempo = menu.busca_lista_dict(tabela_lista_dict, i)
         sum += tempo[0]
     tempos_lista_dict.append((sum/media) * 1e6)
+
+tempos_tupla_dict = []
+for i in palavras:
+    sum = 0
+    for _ in range(media):
+        tempo = menu.busca_lista_dict(tabela_tupla_dict, i)
+        sum += tempo[0]
+    tempos_tupla_dict.append((sum/media) * 1e6)
 
 
 tempos_counter = []
@@ -61,5 +77,7 @@ for i in palavras:
     tempos_dict.append((sum/media) * 1e6)
 
 menu.costruir_grafico(palavras, tempos_lista_dict,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca hash table', save_path= "searchTimesListDict.png",directory= "TrabalhoFinal\\tempos") 
+menu.costruir_grafico(palavras, tempos_tupla_dict,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Busca hash table com tupla', save_path= "searchTimesTupleDict.png",directory= "TrabalhoFinal\\tempos") 
 menu.costruir_grafico(palavras, tempos_counter,Xlabel='Tabelas',Ylabel='Tempos (µs )',title='Tempos de Busca counter', save_path= "searchTimesCounter.png",directory= "TrabalhoFinal\\tempos") 
 menu.costruir_grafico(palavras, tempos_dict,Xlabel='Tabelas',Ylabel='Tempos (µs)',title='Tempos de Busca dicionario', save_path= "searchTimesDict.png",directory= "TrabalhoFinal\\tempos") 
+

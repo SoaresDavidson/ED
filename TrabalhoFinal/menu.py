@@ -11,7 +11,7 @@ def conta_tempo(func):
     return wrapper
 
 @conta_tempo
-def read_from_file_tables(filename:str,tabela:list, value: int = 0) -> None:
+def read_from_file_tables(filename:str,tabela, value: int = 0) -> None:
     try:
         with open(filename, 'r',encoding="utf-8") as file:
             for line in file:
@@ -54,7 +54,6 @@ def _hash(key, capacity):
 
 def addHash(tabela:list, key, value):
     listKey = _hash(key, len(tabela))
-    if key in tabela[listKey].keys(): return
     tabela[listKey][key] = value
 
 def clean_word(word:str) -> str:
@@ -96,7 +95,7 @@ def save_times(filename: str,tipo:str, tempos, directory="TrabalhoFinal/arquivos
         print(f"Erro ao salvar o arquivo: {e}")
 
 
-def calcula_media_tables(arquivo:str,tabela:list, quant:int = 5) -> int:
+def calcula_media_tables(arquivo:str,tabela, quant:int = 5) -> int:
     sum = 0
     for i in range(quant):
         new_tabela = tabela
@@ -142,14 +141,18 @@ def busca_dict(tabela:list,key):
 def delete_lista_dict(tabela:list, key):
     hashKey = _hash(key, len(tabela))
     try:
-        return tabela[hashKey].pop(key)
+        aux = tabela[hashKey][key]
+        del tabela[hashKey][key]
+        return aux
     except:
         return None
     
 @conta_tempo
 def delete_dict(tabela:list,key):
     try:
-        return tabela.pop(key)
+        aux = tabela[key]
+        del tabela[key]
+        return aux
     except:
         return None
 
